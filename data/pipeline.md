@@ -1,0 +1,260 @@
+# Pipeline Inbox
+
+Add URLs here any time. Run `/career-ops pipeline` to process all pending.
+
+## Pending
+
+- [x] https://www.workatastartup.com/jobs/77473 | FurtherAI | Forward Deployed Engineer | EXPIRED (rechecked 06/16/2026)
+- [x] https://www.workatastartup.com/jobs/71033 | StackAI | Forward Deployed AI Engineer | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/accenturefederalservices/jobs/4617714006 | Accenture Federal Services | Data and AI Analyst
+- [ ] https://job-boards.greenhouse.io/accenturefederalservices/jobs/4599650006 | Accenture Federal Services | Data and AI Analyst
+- [x] https://apply.deloitte.com/en_US/careers/JobDetail/Mission-Intelligence-and-Research-Analyst-TS-SCI-with-Poly/340511 | Deloitte | Mission Intelligence and Research Analyst (TS/SCI with Poly) | EXPIRED (rechecked 06/16/2026)
+- [x] https://careers-lmi.icims.com/jobs/13934/systems-engineer-%26-technical-advisor/job | LMI | Systems Engineer & Technical Advisor (Colorado Springs) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://careers-lmi.icims.com/jobs/13590/senior-full-stack-software-engineer---ts-clearance-required/job | LMI | Senior Full-Stack Software Engineer - TS Clearance Required (Colorado Springs)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/4985877008 | Anthropic | Forward Deployed Engineer, Applied AI
+- [x] https://job-boards.greenhouse.io/xai/jobs/4701523007 | xAI | Forward Deployed AI Engineer - Enterprise | EXPIRED (rechecked 06/16/2026)
+- [ ] https://jobs.ashbyhq.com/synthflow/b0cb2768-ac18-42a3-94b2-5e627f24023c | Synthflow | Forward Deployed Engineer
+- [ ] https://jobs.ashbyhq.com/perplexity/aa511ea8-96e3-42ba-b28f-5e222170bcee | Perplexity | Forward Deployed Engineer - Applied AI
+- [ ] https://jobs.ashbyhq.com/openai/7b90b83c-ec28-4e65-a235-6675e37b91c3 | OpenAI | Forward Deployed Software Engineer (Seattle)
+- [ ] https://jobs.ashbyhq.com/writer/4a02c160-bc1e-4a1b-96a7-d5194dfb834a | Writer | AI Engineer
+- [ ] https://jobs.ashbyhq.com/writer/6f91f4f1-9ef4-4f47-bb29-4943d0fc25a0 | Writer | Strategic AI Adoption Lead
+- [x] https://job-boards.greenhouse.io/cresta/jobs/4892934008 | Cresta | Solutions Architect | EXPIRED (rechecked 06/16/2026)
+
+- [x] https://careers.mitre.org/us/en/job/R112988/Senior-Space-Engineer | MITRE | Senior Space Engineer (Air and Space Force Center) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://careers.mitre.org/us/en/job/R115891/Senior-Space-Systems-Engineer | MITRE | Senior Space Systems Engineer
+- [ ] https://www.clearancejobs.com/jobs/8665852/senior-training-specialist-space-controls-systems-operations | Galapagos Federal Systems / Honu Services | Senior Training Specialist - Space Controls Systems Operations (Colorado Springs, $110K-$125K — verify salary)
+- [x] https://www.clearancejobs.com/jobs/8668285/senior-training-specialist-space-control-systems-operator | Rivet Operations Company | Senior Training Specialist - Space Control Systems Operator (Colorado Springs) | EXPIRED (rechecked 06/16/2026)
+- [x] https://www.clearancejobs.com/jobs/8717855/senior-program-analyst | Unknown | Senior Program Analyst (TS/SCI w/CI Poly — verify location & salary) | EXPIRED (rechecked 06/16/2026)
+
+
+- [ ] https://jobs.ashbyhq.com/procurify/36f109d4-4024-4bfe-986c-6997c02b9967 | Procurify | Senior Product Manager, AI
+- [ ] https://jobs.ashbyhq.com/langchain/0a5dd30c-6da1-4095-bd96-b16f27eeb333 | LangChain | Solutions Architect
+- [ ] https://jobs.ashbyhq.com/uipath/7241a90d-4756-4d06-9b14-429e8ee958d2 | UiPath | Solution Architect - Automation
+- [ ] https://jobs.ashbyhq.com/uipath/66cbeab1-9003-446c-b968-d1851bd0aa3e | UiPath | Enterprise AI Solution Architect
+- [ ] https://jobs.ashbyhq.com/lorikeet/a00d35af-2d47-4ed6-8d99-2cb1fb86e44f | Lorikeet | Solutions Architect
+- [ ] https://jobs.ashbyhq.com/fiddler-ai/640c12b9-6a07-4be1-a542-d76e4240e2ff | Fiddler AI | Solutions Architect, Customer Success - US
+- [ ] https://jobs.ashbyhq.com/trm-labs/f637d8d6-54bd-4f24-8699-016980ddc09a | TRM Labs | Solutions Architect
+- [ ] https://jobs.ashbyhq.com/drata/4aa58eb9-77af-4ddc-b54b-abfb57b23b4e | Drata | Senior Enterprise Solutions Architect
+- [ ] https://jobs.ashbyhq.com/owkin/306c60e3-9ecf-40a1-b82a-16976bcfef87 | Owkin | Forward Deployed Engineer
+- [ ] https://jobs.ashbyhq.com/owkin/d2467bc5-6e95-4a4f-8164-061e0262ab19 | Owkin | Senior Forward Deployed Engineer
+- [ ] https://jobs.ashbyhq.com/hopper/24380cbc-bb55-4c1e-b2dd-4420ae9e3eea | Hopper | Forward Deployed Engineer, HTS Assist
+- [ ] https://jobs.ashbyhq.com/periodic-labs/dbac407f-a408-44a3-9e7a-895d42649edc | Periodic Labs | Forward Deployed Engineer - LLM Systems
+- [ ] https://jobs.ashbyhq.com/modal/0d9c249b-f305-4b0e-b325-3242ac7274e7 | Modal | Forward Deployed Engineer - ML
+- [ ] https://jobs.ashbyhq.com/auctor/73648a39-a671-469d-aa7d-f7bb8b3b6d46 | Auctor | Forward Deployed Engineer
+- [ ] https://jobs.ashbyhq.com/cohere/1fa01a03-9253-4f62-8f10-0fe368b38cb9 | Cohere | Applied AI Engineer – Agentic Workflows
+- [ ] https://jobs.ashbyhq.com/revenuecat/998a9cef-3ea5-45c2-885b-8a00c4eeb149 | RevenueCat | Agentic AI Advocate
+- [ ] https://jobs.ashbyhq.com/zapier/cac70300-4e62-4299-bc34-aab69e7498f4 | Zapier | AI Automation Expert
+- [x] https://job-boards.greenhouse.io/smartsheet/jobs/7833978 | Smartsheet | Senior Product Manager - Applied AI | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/postscript/jobs/8445410002 | Postscript | Senior Product Manager, AI | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/sayari/jobs/4140623009 | Sayari | Senior Product Manager, AI Platform | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/securityscorecard/jobs/7782217 | SecurityScorecard | Senior Product Manager, AI | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/isccareers/jobs/4685310005 | ISC | Senior AI Product Manager | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/connectwise/jobs/4682593005 | ConnectWise | Senior Product Manager - AI | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/caylent/jobs/5973733004 | Caylent | Forward Deployed Engineer | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/workato/jobs/8320989002 | Workato | Senior Forward Deployed Engineer
+- [ ] https://job-boards.greenhouse.io/smartsheet/jobs/7798778 | Smartsheet | Senior Forward Deployed AI Engineer
+- [x] https://job-boards.greenhouse.io/mercury/jobs/5888354004 | Mercury | AI Solutions Architect | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/guidepointsecurity/jobs/5691976004 | GuidePoint Security | Generative AI Solution Engineer
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5057258008 | Anthropic | Applied AI Architect, Startups
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/4977624008 | Anthropic | Solutions Architect, Applied AI (Industries)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/4950664008 | Anthropic | Partner Solutions Architect, Applied AI
+- [x] https://job-boards.greenhouse.io/anthropic/jobs/5124533008 | Anthropic | Solutions Architect, Applied AI (Creatives) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/anthropic/jobs/5079540008 | Anthropic | Solutions Architect, Applied AI (Federal Civilian) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/anthropic/jobs/5117589008 | Anthropic | Solutions Architect, Applied AI | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5140405008 | Anthropic | Solutions Architect, Applied AI (Government Technology)
+- [x] https://job-boards.greenhouse.io/anthropic/jobs/5062712008 | Anthropic | Solutions Architect, Applied AI (Beneficial Deployments) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/gleanwork/jobs/4508312005 | Glean | Solutions Architect
+- [x] https://job-boards.greenhouse.io/gleanwork/jobs/4626951005 | Glean | Principal Solutions Architect (Glean Agents) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/gleanwork/jobs/4434258005 | Glean | Solutions Architect (EMEA/US East)
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5978967004 | Arize AI | Partner Product & Solutions Lead
+- [ ] https://job-boards.greenhouse.io/hightouch/jobs/5542602004 | Hightouch | Software Engineer, AI Agents
+- [ ] https://job-boards.greenhouse.io/sayari/jobs/4222358009 | Sayari | Senior AI/ML Engineer
+- [ ] https://job-boards.greenhouse.io/myriad360/jobs/8402449002 | Myriad360 | AI Automation Engineer Tech Lead
+- [x] https://jobs.lever.co/bluelightconsulting/81dfa424-263e-4825-9eb1-d22cb516a77f | Bluelight Consulting | Agentic AI Solutions Architect | EXPIRED (rechecked 06/16/2026)
+- [ ] https://jobs.lever.co/useinsider/fdfa3283-fee9-4a1e-aa01-769c42ae1ac3 | Insider | AI Product Manager - B2B SaaS (Martech)
+- [x] https://jobs.lever.co/thinkahead/6284b2be-1c97-4b96-947d-7576a41dc695 | AHEAD | AI Product Manager | EXPIRED (rechecked 06/16/2026)
+- [ ] https://jobs.lever.co/mistral/77f6fd1b-65cf-45d8-9b68-594c62732f62 | Mistral AI | Applied AI Forward Deployed ML Engineer
+- [x] https://jobs.lever.co/mistral/b5b565a0-533a-43c3-b232-114138422cb0 | Mistral AI | AI Solution Architect, Pre-sales | EXPIRED (rechecked 06/16/2026)
+- [ ] https://jobs.lever.co/netomi/cc7c0f28-0eac-4924-8294-91369e38c1c2 | Netomi | Agentic Solution Engineer
+- [ ] https://jobs.lever.co/thinkahead/84adf2e4-c422-4b45-ad34-3ce6c62f3cdd | AHEAD | AI Engineer, AI Services
+- [ ] https://jobs.lever.co/imo-online/99f3d9be-201b-41b1-82a4-931cb60f2656 | IMO Health | Staff AI Engineer
+- [x] https://www.clearancejobs.com/jobs/8110527/mid-space-counterspace-analyst-operational-intelligence | Prescient Edge | Mid Space Counterspace Analyst - Operational Intelligence (Schriever AFB, TS/SCI) | EXPIRED (rechecked 06/16/2026)
+
+- [ ] https://careers-lmi.icims.com/jobs/13935/future-space-based-threats-operations-analyst-%26-researcher/job | LMI (Logistics Management Institute) | Future Space-Based Threats Operations Analyst & Researcher
+- [ ] https://careers-lmi.icims.com/jobs/13900/satellite-communication-analytics-engineer---mid-level/job | LMI (Logistics Management Institute) | Satellite Communication Analytics Engineer - Mid-level
+- [ ] https://careers-lmi.icims.com/jobs/13877/senior-back-end-software-application-developer---clearance-desired/job | LMI (Logistics Management Institute) | Senior Back-End Software Application Developer - Clearance Desired
+- [ ] https://careers-lmi.icims.com/jobs/13869/satellite-communication-analytics-engineer-%e2%80%93-senior/job | LMI (Logistics Management Institute) | Satellite Communication Analytics Engineer – Senior
+- [ ] https://careers-lmi.icims.com/jobs/13765/mid-level-back-end-software-application-developer/job | LMI (Logistics Management Institute) | Mid Level Back-End Software Application Developer
+- [ ] https://careers-lmi.icims.com/jobs/13704/front-end-software-developer---mid-level/job | LMI (Logistics Management Institute) | Front-End Software Developer - Mid-level
+- [ ] https://careers-lmi.icims.com/jobs/13659/back-end-software-developer---mid-level/job | LMI (Logistics Management Institute) | Back-End Software Developer - Mid-level
+
+
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5065835008 | Anthropic | Applied AI Architect, Enterprise Tech (Boston, MA; New York City, NY; San Francisco, CA | New York City, NY; Seattle, WA; Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5079511008 | Anthropic | Applied AI Architect, National Security (Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5140403008 | Anthropic | Applied AI Architect, State and Local Government (New York City, NY; Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5079562008 | Anthropic | Forward Deployed Engineer, Federal Civilian (San Francisco, CA | New York City, NY | Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/4887952008 | Anthropic | IT Systems Engineer, Corporate Systems & Infrastructure (Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5161882008 | Anthropic | IT Systems Engineer, Enterprise SaaS (Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5198108008 | Anthropic | Research Engineer, Machine Learning (RL Velocity) (Remote-Friendly (Travel-Required) | San Francisco, CA | New York City, NY)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/4595463008 | Anthropic | Security Software Engineer, Detection & Response Platform (San Francisco, CA | New York City, NY | Seattle, WA; Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5063007008 | Anthropic | Software Engineer, Cybersecurity Products (San Francisco, CA | New York City, NY | Seattle, WA; Washington, DC)
+- [ ] https://job-boards.greenhouse.io/anthropic/jobs/5126080008 | Anthropic | Solutions Architect, National Security (Washington, DC)
+- [ ] https://job-boards.eu.greenhouse.io/parloa/jobs/4799672101 | Parloa | Forward Deployed Engineer, VoIP (New York Office; Remotely in the USA)
+- [ ] https://job-boards.eu.greenhouse.io/parloa/jobs/4604587101 | Parloa | Senior/Lead Forward Deployed Engineer - US (New York Office; Remotely in the USA)
+- [ ] https://job-boards.eu.greenhouse.io/parloa/jobs/4843556101 | Parloa | Software Engineer, GTM (Remotely in the USA)
+- [ ] https://job-boards.greenhouse.io/intercom/jobs/7774295 | Intercom | Full-Stack Marketer, Customer Advocacy (USA, Remote)
+- [ ] https://job-boards.greenhouse.io/humeai/jobs/4948192008 | Hume AI | Front-End Engineer (NYC, San Jose, or Remote)
+- [ ] https://job-boards.greenhouse.io/humeai/jobs/5064248008 | Hume AI | Senior Platform Engineer (New York, New York, United States)
+- [ ] https://job-boards.greenhouse.io/airtable/jobs/8409168002 | Airtable | AI Agent Architect, Customer Experience (Remote - US)
+- [ ] https://job-boards.greenhouse.io/airtable/jobs/8487502002 | Airtable | Senior Solutions Architect (San Francisco, CA; New York, NY; Remote - US)
+- [ ] https://job-boards.greenhouse.io/airtable/jobs/8442397002 | Airtable | Software Engineer, Compute (8+ YOE) (San Francisco, CA; New York, NY; Remote - US)
+- [ ] https://job-boards.greenhouse.io/airtable/jobs/8397618002 | Airtable | Software Engineer, Product Backend (8+ YOE) (San Francisco, CA; Remote - US (Seattle, WA only))
+- [x] https://job-boards.greenhouse.io/vercel/jobs/5843010004 | Vercel | Anti-Abuse Automation Engineer (Remote - United States) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/vercel/jobs/5872425004 | Vercel | Forward Deployed Engineer, v0 (Remote - United States) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5788954004 | Vercel | Senior Software Engineer, Trust & Safety (Remote - United States)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5430088004 | Vercel | Software Engineer, Backend (Remote - United States)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5473266004 | Vercel | Software Engineer, CDN Security (Remote - United States)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5551619004 | Vercel | Software Engineer, Compute (Remote - United States)
+- [x] https://job-boards.greenhouse.io/vercel/jobs/5813134004 | Vercel | Software Engineer, Domains (Remote - United States) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5661583004 | Vercel | Software Engineer, Lua (Remote - United States)
+- [ ] https://job-boards.greenhouse.io/vercel/jobs/5796302004 | Vercel | Solutions Architect (Remote - United Kingdom, Germany)
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5818115004 | Arize AI | AI Product Manager (United States (Remote))
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5797408004 | Arize AI | AI Solutions Engineer (San Francisco (Remote))
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5781408004 | Arize AI | AI Solutions Engineer, EMEA (EMEA (Remote))
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5980312004 | Arize AI | DevSecOps Engineer (TypeScript & Agentic AI) (Remote/Hybrid (SoCal))
+- [ ] https://job-boards.greenhouse.io/arizeai/jobs/5396396004 | Arize AI | Senior AI Product Engineer, Backend (Remote (United States))
+- [ ] https://job-boards.greenhouse.io/runpod/jobs/5173070008 | RunPod | Forward Deployed Engineer APAC (Remote, APAC)
+- [ ] https://job-boards.greenhouse.io/runpod/jobs/4142227008 | RunPod | Senior Software Engineer (Cloud) (Remote, USA )
+- [ ] https://job-boards.greenhouse.io/runpod/jobs/4785681008 | RunPod | Software Engineer (Full-Stack) (Remote, USA)
+- [x] https://job-boards.greenhouse.io/gleanwork/jobs/4651950005 | Glean | Forward Deployed Product Manager (Remote - US) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/gleanwork/jobs/4651991005 | Glean | Founding Forward Deployed Engineer (Remote - US)
+- [x] https://job-boards.greenhouse.io/gleanwork/jobs/4436194005 | Glean | Software Engineer, Platform Security (Remote - US) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.eu.greenhouse.io/speechmatics/jobs/4792165101 | Speechmatics | Forward Deployed Engineer (San Francisco, California, United States)
+- [ ] https://jobs.ashbyhq.com/cohere/fea8cc38-1a55-4f1c-a652-8c39c66138fc | Cohere | Forward Deployed Engineer, Infrastructure SpecialistAgentic Platform • Dubai; United Arab Emirates • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/cohere/69a9ab2e-a7eb-4c4f-825a-5c25cf063900 | Cohere | Forward Deployed Engineer, Infrastructure Specialist (UK/EU/ME)Agentic Platform • United Kingdom; Europe • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/cohere/9c18b199-cd1f-4ef3-9fab-ce05589348ae | Cohere | Applied AI Engineer - Agentic Workflows (Singapore)Applied-ML • Singapore • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/cohere/ca446389-c793-459b-b07a-a3544defea04 | Cohere | Solutions ArchitectSolutions Architecture • Japan • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/cohere/6d0f0753-ff22-46fd-90e9-08998914a8e7 | Cohere | Solutions Architect - Public SectorSolutions Architecture • Washington, DC • Full time • Hybrid
+- [ ] https://jobs.ashbyhq.com/langchain/b8dead31-212a-4b92-82a7-c42df16ae877 | LangChain | Customer Engineer (West Coast)Customer Engineering • San Francisco, CA; Seattle, WA • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/43d28b41-f3f2-4b43-a57e-bd372a8138ca | LangChain | Engagement Manager Customer Engineering • San Francisco, CA • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/fc868832-3865-4f4a-8222-33422a7d3d96 | LangChain | Solutions Architect (Amsterdam)Customer Engineering • Amsterdam • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/da7cbabd-ceed-4d7d-ae25-f226cac0c1c1 | LangChain | Solutions Architect (Austin)Customer Engineering • Austin, TX • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/933a41a3-43ca-44de-a0ae-f541149151b7 | LangChain | Solutions Architect (Dallas)Customer Engineering • Dallas, TX • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/671f9372-8646-4f6a-a473-61bfa7cafa4b | LangChain | Deployed Engineer (Amsterdam)Deployed Engineering • Amsterdam • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/937e131f-1055-4f1f-bd8a-f036e4ba0666 | LangChain | Deployed Engineer (Austin)Deployed Engineering • Austin, TX • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/d7454c6d-7025-4e46-befc-e23bedd8f452 | LangChain | Deployed Engineer (Charlotte)Deployed Engineering • Charlotte, NC • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/38947013-3d0c-4257-aa58-ab8fe247ea3e | LangChain | Deployed Engineer (Chicago)Deployed Engineering • Chicago, IL • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/8b533cc4-6654-44b4-b3fc-004def2a9927 | LangChain | Deployed Engineer (Dallas)Deployed Engineering • Dallas, TX • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/3f793a73-9b0d-456b-9a7c-16441e3e6e69 | LangChain | Deployed Engineer (Denver)Deployed Engineering • Denver, CO • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/31ff2b5b-d5c5-443e-bf11-ef02481df579 | LangChain | Deployed Engineer (Germany)Deployed Engineering • Germany • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/dea6e10a-5cc8-4956-85b4-1ca88b8c0a95 | LangChain | Deployed Engineer (Las Vegas)Deployed Engineering • Las Vegas, NV • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/2a1f67e3-7509-4c92-9ec8-2e645d00c3eb | LangChain | Deployed Engineer (Phoenix)Deployed Engineering • Phoenix, AZ • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/733417d6-7b74-4260-95d9-3cabf85ce0b8 | LangChain | Deployed Engineer (Raleigh)Deployed Engineering • Raleigh, NC • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/91bb582c-fe9a-4651-9e9f-cdb452ec6532 | LangChain | Deployed Engineer (Salt Lake City)Deployed Engineering • Salt Lake City, UT • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/c02afa2f-5544-411d-a4e2-8bdc199b0c53 | LangChain | Deployed Engineer (Singapore)Deployed Engineering • Singapore • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/pinecone/773e953d-8f53-4313-93b4-35a553bad1cb | Pinecone | Senior/Staff Software Engineer, Experience PlatformR&D • US Remote • Full time • Remote$190K – $270K • Offers Equity
+- [ ] https://jobs.ashbyhq.com/pinecone/7ef089cb-a721-4ad8-a6d0-c390e64991d2 | Pinecone | Senior/Staff Software Engineer, Search & Retrieval InfrastructureR&D • US Remote • Full time • Remote$190K – $270K • Offers Equity
+- [ ] https://job-boards.greenhouse.io/blackforestlabs/jobs/4642947008 | Black Forest Labs | Senior Solutions Architect (San Francisco (USA))
+- [ ] https://helsing.ai/jobs/4729613101?gh_jid=4729613101 | Helsing | Software Engineer - Infrastructure (Washington, DC)
+- [x] https://job-boards.greenhouse.io/contentful/jobs/7544101 | Contentful | Analytics Engineer (Denver, Colorado, United States) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/contentful/jobs/7875509 | Contentful | Full Stack Software Engineer III (Denver, Colorado, United States) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://job-boards.greenhouse.io/contentful/jobs/7560356 | Contentful | Senior Business Intelligence Analyst (Denver, Colorado, United States)
+- [ ] https://careers.hellofresh.com/global/en/job/7586851?gh_jid=7586851 | HelloFresh | Area Manager I - Fulfillment (Goodyear, AZ, United States)
+- [ ] https://careers.hellofresh.com/global/en/job/7845008?gh_jid=7845008 | HelloFresh | Staff Backend Engineer, Customer Value Optimisation (New York, NY, United States)
+- [ ] https://sumup.com/careers/positions/8529492002?gh_jid=8529492002 | SumUp | Analytics Engineer (Boulder, Colorado, United States)
+- [ ] https://jobs.lever.co/qonto/1fb7a10a-9377-47d4-99f6-e826880c3a6b | Qonto | Senior/Staff - Backend Engineer - remote friendly (Barcelona)
+- [ ] https://job-boards.eu.greenhouse.io/physicsx/jobs/4849382101 | PhysicsX | Machine Learning Engineer (New York, United States )
+- [ ] https://job-boards.eu.greenhouse.io/physicsx/jobs/4839390101 | PhysicsX | Senior Forward Deployed Software Engineer (New York, United States)
+- [ ] https://job-boards.eu.greenhouse.io/physicsx/jobs/4678291101 | PhysicsX | Senior Machine Learning Engineer (New York, United States )
+- [ ] http://stability.ai/careers?gh_jid=4712826101 | Stability AI | Generative AI Inference Engineer (United States )
+- [ ] http://stability.ai/careers?gh_jid=4770256101 | Stability AI | Multimodal Generative AI Researcher (Remote)
+- [ ] http://stability.ai/careers?gh_jid=4712821101 | Stability AI | Senior Backend Engineer (United States )
+- [ ] https://job-boards.eu.greenhouse.io/amplemarket/jobs/4488062101 | Amplemarket | Frontend Software Engineer (Remote, EMEA/LATAM)
+- [ ] https://job-boards.eu.greenhouse.io/amplemarket/jobs/4066973101 | Amplemarket | Fullstack Software Engineer (Remote, EMEA/LATAM)
+- [ ] https://job-boards.eu.greenhouse.io/amplemarket/jobs/4066899101 | Amplemarket | Senior Backend Software Engineer (Remote, EMEA/LATAM/North America)
+
+- [x] https://job-boards.greenhouse.io/vercel/jobs/5431123004 | Vercel | Software Engineer, Backend (Remote - United States) | EXPIRED (rechecked 06/16/2026)
+
+- [ ] https://careers-lmi.icims.com/jobs/14007/forward-deployed-engineer---clearance-required/job | LMI (Logistics Management Institute) | Forward Deployed Engineer - Clearance Required
+
+- [ ] https://jobs.ashbyhq.com/cohere/75c0032c-7200-48bf-9d6d-355880dd93d9 | Cohere | Forward Deployed Engineer, Agentic PlatformAgentic Platform • Middle East • Full time • Hybrid
+- [ ] https://jobs.ashbyhq.com/cohere/556467eb-3dc8-46e2-b015-277872210997 | Cohere | Forward Deployed Engineer, Sovereign AIAgentic Platform • Ottawa • Full time • Hybrid
+- [ ] https://jobs.ashbyhq.com/cohere/1bc73d85-e6f4-4338-b53a-9ffb609a950d | Cohere | Solutions Architect - Public SectorSolutions Architecture • Ottawa • Full time • Hybrid
+- [ ] https://jobs.ashbyhq.com/pinecone/499ce77a-7ed0-462e-9efb-3e7dad6cd5ad | Pinecone | Senior/Staff Software Engineer, Search & Retrieval InfrastructureR&D • Tel Aviv • Full time • Hybrid
+- [ ] https://job-boards.greenhouse.io/contentful/jobs/7789210 | Contentful | Field Enablement Program Manager (Denver, Colorado, United States)
+- [ ] https://job-boards.greenhouse.io/contentful/jobs/7759724 | Contentful | Senior RFP Program Manager (Denver, Colorado, United States)
+- [x] https://job-boards.greenhouse.io/contentful/jobs/7736265 | Contentful | Senior Technical Enablement Architect (Portland, Oregon, United States) | EXPIRED (rechecked 06/16/2026)
+- [x] https://careers.hellofresh.com/global/en/job/7872831?gh_jid=7872831 | HelloFresh | Senior Operations Manager (Goodyear, AZ, United States) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://www.scandit.com/careers/job-description/?gh_jid=7882502 | Scandit | Customer Success Engineer (United States)
+- [ ] https://www.scandit.com/careers/job-description/?gh_jid=7820556 | Scandit | Senior Solutions Consultant (Enterprise Retail) (United States)
+
+- [x] https://job-boards.greenhouse.io/runpod/jobs/5191760008 | RunPod | Developer Relations Lead, AI Infrastructure and Community (Remote, USA) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/contentful/jobs/7736263 | Contentful | Senior Technical Enablement Architect (Austin, Texas, United States) | EXPIRED (rechecked 06/16/2026)
+- [x] https://jobs.lever.co/cgsfederal/e842a60b-2c32-49ef-a639-3befd745c2cf | CGS Federal | Senior Operations Manager (Remote) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://careers-lmi.icims.com/jobs/13934/systems-engineer-%26-technical-advisor---ts-clearance-required/job | LMI (Logistics Management Institute) | Systems Engineer & Technical Advisor - TS Clearance Required
+
+- [ ] https://job-boards.eu.greenhouse.io/polyai/jobs/4874048101 | PolyAI | Partner & GTM Enablement Program Manager (United States)
+- [x] https://job-boards.eu.greenhouse.io/parloa/jobs/4866271101 | Parloa | Senior Forward Deployed Engineer - Partner Success - US (Remotely in the USA) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/arizeai/jobs/6002637004 | Arize AI | Forward Deployed Engineer, US (Remote (United States)) | EXPIRED (rechecked 06/16/2026)
+- [x] https://job-boards.greenhouse.io/gleanwork/jobs/4694839005 | Glean | Software Engineer, Platform Security (Remote - US) | EXPIRED (rechecked 06/16/2026)
+- [ ] https://jobs.ashbyhq.com/cohere/67c4c05a-f7ab-48dc-a779-af835e2d36f1 | Cohere | Solutions ArchitectSolutions Architecture • Saudi Arabia • Full time • Hybrid
+- [ ] https://sumup.com/careers/positions/8555715002?gh_jid=8555715002 | SumUp | Technical Product Manager - Platform (Boulder, Colorado, United States)
+- [ ] https://jobs.lever.co/pigment/c75c7073-43d6-4b3e-993e-3b9ba7aab50b | Pigment | Technical Solutions Consultant (United States)
+- [ ] https://careers-lmi.icims.com/jobs/14054/space-operations-software-engineer/job | LMI (Logistics Management Institute) | Space Operations Software Engineer
+- [ ] https://careers-lmi.icims.com/jobs/14036/back-end-software-developer/job | LMI (Logistics Management Institute) | Back End Software Developer
+- [ ] https://careers-lmi.icims.com/jobs/14035/front-end-software-developer/job | LMI (Logistics Management Institute) | Front End Software Developer
+- [ ] https://careers-lmi.icims.com/jobs/14033/analytics-engineer/job | LMI (Logistics Management Institute) | Analytics Engineer
+- [ ] https://careers-lmi.icims.com/jobs/13765/sr.-level-back-end-software-application-developer/job | LMI (Logistics Management Institute) | Sr. Level Back-End Software Application Developer
+
+- [ ] https://job-boards.greenhouse.io/airtable/jobs/8498915002 | Airtable | Senior Solutions Architect (Remote - US)
+- [ ] https://jobs.ashbyhq.com/langchain/31483b31-68c5-4603-8a84-0051634100c0 | LangChain | Deployed Engineer (Stockholm)Deployed Engineering • Sweden • Full time • Remote
+- [ ] https://jobs.ashbyhq.com/langchain/ea3df015-477b-4197-a53f-c44029632a7d | LangChain | Senior Platform Engineer, IngestionEngineering • Amsterdam • Full time • Remote
+- [ ] https://careers.hellofresh.com/global/en/job/7942481?gh_jid=7942481 | HelloFresh | (US-DC) Area Manager I, Fulfillment (Goodyear, AZ, United States)
+- [ ] https://careers.hellofresh.com/global/en/job/7953954?gh_jid=7953954 | HelloFresh | [US DC] Manager Master Data & Systems Integration (Aurora, IL, United States; Goodyear, AZ, United States)
+- [ ] https://careers.hellofresh.com/global/en/job/7967803?gh_jid=7967803 | HelloFresh | [US HQ] Senior Instructional Designer (Boulder, Colorado, United States; Irving, TX, United States; Newark, NJ, United States; Phoenix, AZ, United States)
+- [ ] https://careers-lmi.icims.com/jobs/14157/model-based-systems-engineer---clearance-required/job | LMI (Logistics Management Institute) | Model Based Systems Engineer - Clearance Required
+- [ ] https://careers-lmi.icims.com/jobs/14153/full-stack-software-developer/job | LMI (Logistics Management Institute) | Full Stack Software Developer
+
+
+## Processed
+
+- [x] https://www.usajobs.gov/job/863852900 | US Space Force | Program Analyst (GS-12, Colorado Springs) | EXPIRED (closed 04/10/2026)
+- [x] https://www.usajobs.gov/job/863833000 | US Space Force | Program Analyst (GS-13 equiv, Schriever SFB) | EXPIRED (closed 04/17/2026)
+- [x] https://www.usajobs.gov/job/857426400 | US Space Force | Chief Missile Warning Space Domain Awareness & Space Ops Division (GS-14/15, Peterson SFB) | EXPIRED (closed 02/18/2026)
+- [x] https://www.usajobs.gov/job/863463000 | US Space Force | Division Chief Space Acquisition and Integration Office SAIO/SL (GS-14/15, Schriever SFB) | EXPIRED (closed 04/08/2026)
+- [x] https://www.usajobs.gov/job/864163900 | USSF | Intelligence Specialist (GS-13/14, Colorado Springs) | EXPIRED (closed 04/14/2026)
+- [x] https://www.usajobs.gov/job/857700200 | USSF | Program Analyst (GS-13/14) | EXPIRED (closed 02/23/2026)
+- [x] https://www.usajobs.gov/job/865151800 | USSF | Space MASINT Analysis and Production Team Lead (GG-13) | EXPIRED (closed 04/21/2026)
+- [x] https://www.usajobs.gov/job/863101200 | DoD | Intelligence Research Specialist (GS-13) | EXPIRED (closed 04/08/2026)
+- [x] https://www.usajobs.gov/job/865960600 | DoD | Intelligence Research Specialist (GS-13) | EXPIRED (closed 04/28/2026)
+
+- [x] https://www.clearancejobs.com/jobs/8836863/intelligence-support-to-information-operations-isio-analystsm | Peraton | Intelligence Support to Information Operations (ISIO) Analyst/SM | #008 | 3.6/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8836233/senior-intel-analyst-collection-management | Peraton | Senior Intel Analyst - Collection Management | #009 | 4.0/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8809703/counter-space-intelligence-instructor-analyst | Software Engineering Services | Counter-Space Intelligence Instructor / Analyst | #010 | 3.5/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8840887/instructor-developer-iv-distance-learning-space-battle-managemen | Aleut Federal LLC | Instructor Developer IV - Distance Learning Space Battle Management | #011 | 2.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8840888/instructor-developer-iv-distance-learning-intelligence-operation | Aleut Federal LLC | Instructor Developer IV - Distance Learning Intelligence Operations | #012 | 2.5/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8840884/instructor-developer-iv-distance-learning-orbital-warfare-subjec | Aleut Federal LLC | Instructor Developer IV - Distance Learning Orbital Warfare | #013 | 2.2/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8840885/instructor-developer-iv-distance-learning-space-ew-subject-matte | Aleut Federal LLC | Instructor Developer IV - Distance Learning Space EW | #014 | 2.2/5 | PDF ❌
+- [x] https://job-boards.greenhouse.io/defenseunicorns/jobs/4980238007 | Defense Unicorns | Forward Deployed AI Engineer | #015 | 2.8/5 | PDF ❌
+- [x] https://jobs.saic.com/jobs/17563980-sr-principal-program-management-analyst | SAIC | Sr. Principal Program Management Analyst | #016 | 3.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728401/senior-space-counter-space-operational-intelligence-analyst | Amentum | Senior Space Counter-Space Operational Intelligence Analyst | #017 | 3.8/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728388/senior-space-counter-space-operational-intelligence-opintel | Amentum | Senior Space / Counter-Space Operational Intelligence (OPINTEL) | #018 | 3.9/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728370/senior-all-source-analyst-ord | Amentum | Senior All-Source Analyst (OR&D) | #019 | 3.6/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728394/mid-intelligence-planner-joint | Amentum | Mid Intelligence Planner (Joint) | #020 | 3.2/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728386/mid-all-source-analyst-ord | Amentum | Mid All-Source Analyst (OR&D) | #021 | 3.1/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728379/collection-manager | Amentum | Collection Manager | #022 | 3.3/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728376/mid-space-counterspace-analyst-ew | Amentum | Mid Space Counterspace Analyst (EW) | #023 | 3.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728371/mid-masint-analyst | Amentum | Mid MASINT Analyst | #024 | 2.8/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8728367/mid-space-counterspace-analyst-ew | Amentum | Mid Space / Counterspace Analyst (EW) | #025 | 3.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8818278/intelligence-operations-integrator | Barbaricum | Intelligence Operations Integrator | #026 | 3.1/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8345965/technical-instructor-sme-technical-surveillance | Nightwing | Technical Instructor SME - Technical Surveillance | #027 | 1.8/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8834776/intel-analyst-shift-worker | CACI | Intel Analyst - Shift Worker | #028 | 2.2/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8796063/signals-analyst | CACI | Signals Analyst | #029 | 3.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8818854/imagery-analyst-intermediate-mid-level | BAE Systems | Imagery Analyst - Intermediate (mid) Level | #030 | 2.3/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8758899/program-chief-engineer-space-intelligence-surveillance-reco | RTX | Program Chief Engineer - Space Intelligence, Surveillance & Reconnaissance | #031 | 2.1/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8841355/operations-planner-counter-transnational-criminal-organization | ASRC Federal | Operations Planner - Counter-Transnational Criminal Organization | #032 | 2.6/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8826805/assessments-analyst | Deft9 Solutions | Assessments Analyst | #033 | 3.6/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8826804/intel-support-to-io-analyst | Deft9 Solutions | Intel Support to IO Analyst | #034 | 3.7/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8801868/imint-analyst-intelligence-analyst-4-27712 | HII Mission Technologies | IMINT Analyst (Intelligence Analyst 4) | #035 | 2.4/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8799689/elint-analyst | Anonymous Employer | ELINT Analyst | #036 | 3.3/5 | PDF ❌
+- [x] https://www.clearancejobs.com/jobs/8817059/intelligence-specialist | Department of the Air Force | Intelligence Specialist | #037 | 3.0/5 | PDF ❌ (ClearanceJobs 404 — verify on USAJobs.gov)

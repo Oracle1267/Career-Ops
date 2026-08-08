@@ -1,0 +1,1465 @@
+# Portal Scanner Configuration
+# Used by /career-ops scan to discover new offers automatically.
+#
+# Strategy (3 levels):
+#   1. Playwright → careers_url of each company (real-time, reliable)
+#   2. Greenhouse API → structured JSON (fast, Greenhouse-only)
+#   3. WebSearch with site: filters (broad discovery, may be stale)
+#
+# IMPORTANT: Each company in tracked_companies MUST have careers_url.
+#
+# HOW TO CUSTOMIZE:
+#   1. Copy this file to portals.yml in the project root
+#   2. Edit title_filter.positive with YOUR target role keywords
+#   3. Add/remove companies in tracked_companies
+#   4. Adjust search_queries for your preferred job boards
+#   5. Set enabled: false on companies you don't care about
+
+# -- Title filter --
+# The scanner uses these keywords to decide if a title is relevant.
+# At least 1 positive must match AND 0 negatives must match (case-insensitive).
+
+title_filter:
+  positive:
+    # [CUSTOMIZE] Add keywords matching YOUR target roles
+    # -- AI/ML roles --
+    - "AI Engineer"
+    - "AI Architect"
+    - "AI Product Manager"
+    - "AI Platform"
+    - "AI Infrastructure"
+    - "AI Solutions"
+    - "AI Solution"
+    - "AI Agent"
+    - "LLM"
+    - "Agentic"
+    - "GenAI"
+    - "Generative AI"
+    - "NLP"
+    - "Machine Learning"
+    - "ML Engineer"
+    - "ML Systems"
+    - "LLMOps"
+    - "MLOps"
+    - "Voice AI"
+    - "Conversational AI"
+    - "Speech"
+    # -- German AI/ML keywords (DACH market) --
+    - "KI Engineer"
+    - "KI Trainer"
+    - "Dozent"
+    - "Weiterbildung"
+    # -- Engineering roles --
+    - "Platform Engineer"
+    - "Software Engineer"
+    - "Software Developer"
+    - "Software Architect"
+    - "Systems Engineer"
+    - "Full-Stack"
+    - "Full Stack"
+    - "Back-End"
+    - "Backend"
+    - "Front-End"
+    - "Frontend"
+    - "Application Developer"
+    - "DevSecOps"
+    - "Solutions Architect"
+    - "Solutions Engineer"
+    - "Forward Deployed"
+    - "Deployed Engineer"
+    - "Customer Engineer"
+    - "Integration Engineer"
+    # -- Product roles --
+    - "AI Product Manager"
+    - "Technical Product Manager"
+    - "Technical PM"
+    # -- Automation roles --
+    - "Automation Engineer"
+    - "Automation Architect"
+    - "Hyperautomation"
+    - "Low-Code"
+    - "No-Code"
+    - "GTM Engineer"
+    - "Business Systems"
+    - "Internal Tools"
+    - "Transformation"
+    - "Workflow"
+    - "Modernization"
+    - "Systems Modernization"
+    - "Operational Systems"
+    - "Technical Program Manager"
+    - "Technical Project Manager"
+    - "TPM"
+    - "Program Manager"
+    - "Project Manager"
+    - "PMO"
+    - "Delivery Manager"
+    - "Technical Delivery"
+    - "Product Operations"
+    - "Product Enablement"
+    - "Operations Manager"
+    - "Technical Operations"
+    - "Operational Planning"
+    - "Operational Readiness"
+    - "Change Management"
+    - "Enablement"
+    - "Implementation"
+    - "Solutions Consultant"
+    - "Customer Success"
+    - "Systems Analyst"
+    - "Business Analyst"
+    - "Program Analyst"
+    - "Training Lead"
+    - "Training Manager"
+    - "Training Operations"
+    - "Learning Technology"
+    - "Curriculum"
+    - "Agile"
+    - "Scrum"
+    - "Jira"
+    - "AI Program"
+    # -- Space / defense / C2 keywords (Colorado Springs gravity) --
+    - "Golden Dome"
+    - "C3BM"
+    - "JADC2"
+    - "Command and Control"
+    - "All-Domain Command and Control"
+    - "Space-Based Reconnaissance"
+    - "SDA"
+    - "Space Development Agency"
+    - "Mission Integration"
+    - "Warfighter Integration"
+    - "Transition to Operations"
+    - "Capability Transition"
+    - "Operational Integration"
+    - "Mission Systems"
+    - "Principal Systems Analyst"
+    - "Operations Research"
+    - "Operational Readiness"
+    - "Capability Fielding"
+    - "Test Management"
+    - "Requirements Analyst"
+    - "Test and Evaluation"
+    - "T&E"
+    - "Liaison"
+    - "LNO"
+    - "CFC"
+    - "SpRCO"
+    - "STARCOM"
+    - "PMW"
+    - "NAVWAR"
+    - "Exercise Support"
+    - "Schriever"
+    - "Peterson"
+    - "PAE"
+    - "Infrastructure Portfolio Acquisition Executive"
+    - "AI Enablement"
+    - "Mission Operations"
+    - "Operational Advisor"
+    - "Change Advisory"
+    - "Organizational Assessment"
+    - "Response Technology"
+    - "Program Execution"
+    - "Workforce Planning"
+    - "Capacity Planning"
+    - "CONOPS"
+    - "Process Improvement"
+    - "Process Optimization"
+    - "Systems Integration"
+    - "Technical Integration"
+    - "Implementation Lead"
+    - "Integration Lead"
+    - "Business Process Engineer"
+    - "Training Systems"
+    - "Training Architect"
+    - "Learning Systems"
+    - "Instructional Systems"
+    - "Pipeline Optimization"
+    - "AI Workflow"
+    - "AI Integration"
+    - "AI Operations"
+    - "Cleared Technical"
+    # -- Defense / cleared roles --
+    - "Intelligence Analyst"
+    - "Intelligence Systems Analyst"
+    - "Data Systems Analyst"
+    - "All-Source"
+    - "ISR"
+    - "SIGINT"
+    - "Space Systems"
+    - "Space Operations"
+    - "Cleared"
+    - "TS/SCI"
+    - "Curriculum Developer"
+    - "Instructional Designer"
+    - "Training Developer"
+    - "Technical Instructor"
+    - "Operations Analyst"
+    - "Mission Analyst"
+    # -- AI/Data hybrid (cleared) --
+    - "AI Integration"
+    - "AI Analyst"
+    - "Data Systems Analyst"
+    - "Knowledge Management"
+    - "Digital Transformation"
+    - "Emerging Technology"
+    - "Applied AI"
+    - "Data Analyst"
+    - "Analytics Engineer"
+    # -- Program/acquisition --
+    - "Acquisition Analyst"
+    - "Requirements Analyst"
+    # -- FFRDC / think tank titles --
+    - "Technical Research Analyst"
+    - "Technical Advisor"
+  negative:
+    # [CUSTOMIZE] Add keywords for roles you want to exclude
+    - "Junior"
+    - "Intern"
+    - ".NET"
+    - "Java "
+    - "iOS"
+    - "Android"
+    - "PHP"
+    - "Ruby"
+    - "Embedded"
+    - "Firmware"
+    - "FPGA"
+    - "ASIC"
+    - "Blockchain"
+    - "Web3"
+    - "Crypto"
+    - "Salesforce Admin"
+    - "SAP "
+    - "Oracle EBS"
+    - "Mainframe"
+    - "COBOL"
+    - "Account Executive"
+    - "Account Manager"
+    - "Sales "
+    - "Sales Development"
+    - "Business Development Representative"
+    - "BDR"
+    - "SDR"
+    - "Customer Success Manager"
+    - "Product Marketing"
+    - "Growth Marketing"
+    - "Demand Generation"
+    - "Recruiter"
+    - "Recruiting"
+    - "Talent Acquisition"
+    - "People Operations"
+    - "Finance"
+    - "Legal"
+    - "Counsel"
+    - "Office Manager"
+    - "Compliance Officer"
+    - "Counsel"
+    - "Evangelist"
+    - "Fellows Program"
+    - "Fellowship"
+    - "Head of"
+    - "Director"
+    - "VP "
+    - "Vice President"
+    - "Engineering Manager"
+    - "Manager,"
+    - "Investigator"
+    - "Research Scientist"
+    - "Principal Engineer"
+    - "Staff Engineer"
+    - "Frontend"
+    - "Backend"
+    - "Full Stack Engineer"
+    - "Senior Software Engineer"
+    - "AI/ML Engineer"
+    - "Machine Learning Engineer"
+    - "DevOps Engineer"
+    - "DevSecOps Engineer"
+    - "Site Reliability"
+    - "Elastic Stack"
+    - "Elasticsearch"
+    - "Kibana"
+    - "Logstash"
+    - "Kafka"
+    - "Kubernetes"
+    - "Terraform"
+    - "Workday HCM"
+    - "Salesforce Architect"
+    - "ServiceNow Architect"
+    - "OT/ICS"
+    - "CISSP Required"
+    - "CISM Required"
+    - "Capture Manager"
+    - "P&L"
+    - "EBIT"
+    - "Quota"
+    - "ML Researcher"
+    - "Data Scientist"
+    - "Field Technician"
+    - "Help Desk"
+    - "Desktop Support"
+    - "Commission"
+    - "Insurance Agent"
+    - "Real Estate"
+    - "Nurse"
+    - "Physician"
+    - "Attorney"
+    - "Paralegal"
+  seniority_boost:
+    # These prefixes add relevance but are not required
+    - "Senior"
+    - "Staff"
+    - "Principal"
+    - "Lead"
+    - "Head"
+    - "Director"
+
+location_filter:
+  positive:
+    - "Remote"
+    - "Remote US"
+    - "Remote, US"
+    - "US Remote"
+    - "Remote-Friendly, United States"
+    - "United States"
+    - "USA"
+    - "Colorado"
+    - "Colorado Springs"
+    - "Denver"
+    - "Aurora"
+    - "Boulder"
+    - "Hybrid"
+    - "Buckley"
+    - "Peterson"
+    - "Schriever"
+  negative:
+    - "New York"
+    - "New York City"
+    - "NYC"
+    - "San Francisco"
+    - "Bay Area"
+    - "Palo Alto"
+    - "Mountain View"
+    - "Menlo Park"
+    - "Redwood City"
+    - "San Jose"
+    - "Oakland"
+    - "Seattle"
+    - "Bellevue"
+    - "Redmond"
+    - "Los Angeles"
+    - "Santa Monica"
+    - "San Diego"
+    - "SoCal"
+    - "San Ramon"
+    - "California"
+    - "West Coast"
+    - "India"
+    - "Bangalore"
+    - "Canada"
+    - "Toronto"
+    - "Australia"
+    - "United Kingdom"
+    - "UK"
+    - "Europe"
+    - "EU"
+    - "EMEA"
+    - "APAC"
+    - "LATAM"
+    - "Singapore"
+    - "Dubai"
+    - "United Arab Emirates"
+    - "Japan"
+    - "London"
+    - "Dublin"
+    - "Korea"
+    - "Tokyo"
+    - "Paris"
+    - "Berlin"
+
+# -- Search queries --
+# Each query triggers a WebSearch. Use site: to filter by portal.
+# The scanner extracts title, URL, and company from results.
+
+search_queries:
+  # -- Ashby --
+  - name: Ashby — AI PM
+    query: 'site:jobs.ashbyhq.com "AI Product Manager" OR "Senior Product Manager AI" remote'
+    enabled: true
+
+  - name: Ashby — Solutions Architect
+    query: 'site:jobs.ashbyhq.com "Solutions Architect" AI OR automation remote'
+    enabled: true
+
+  - name: Ashby — AI Engineer
+    query: 'site:jobs.ashbyhq.com "AI Engineer" OR "LLM Engineer" OR "Forward Deployed" remote'
+    enabled: true
+
+  - name: Ashby — Agentic
+    query: 'site:jobs.ashbyhq.com "Agentic" OR "AI Agent" OR "Automation Architect" remote'
+    enabled: true
+
+  # -- Greenhouse --
+  - name: Greenhouse — AI PM
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "AI Product Manager" OR "Senior Product Manager" AI remote'
+    enabled: true
+
+  - name: Greenhouse — SA & FDE
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Solutions Architect" OR "Forward Deployed" AI remote'
+    enabled: true
+
+  - name: Greenhouse — AI Engineer
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "AI Engineer" OR "LLM" OR "Agentic" remote'
+    enabled: true
+
+  # -- Lever --
+  - name: Lever — AI PM
+    query: 'site:jobs.lever.co "AI Product Manager" OR "Solutions Architect" AI remote'
+    enabled: true
+
+  - name: Lever — AI Roles
+    query: 'site:jobs.lever.co "AI Engineer" OR "Agentic" OR "LLMOps" OR "Automation" remote'
+    enabled: true
+
+  # -- Wellfound (startups) --
+  - name: Wellfound — AI PM
+    query: 'site:wellfound.com "AI Product Manager" OR "AI Solutions" remote'
+    enabled: true
+
+  # -- Workable --
+  - name: Workable — AI Roles
+    query: 'site:apply.workable.com "AI" "Product Manager" OR "Solutions Architect" OR "AI Engineer" remote'
+    enabled: true
+
+  # -- No-Code / Low-Code / Automation --
+  - name: Ashby — No-Code & Automation
+    query: 'site:jobs.ashbyhq.com "no-code" OR "low-code" OR "automation engineer" OR "n8n" OR "Make" OR "Airtable" remote senior'
+    enabled: true
+
+  - name: Greenhouse — No-Code & Automation
+    query: 'site:job-boards.greenhouse.io "no-code" OR "low-code" OR "automation engineer" OR "business systems" senior remote'
+    enabled: true
+
+  - name: GTM Engineer — All portals
+    query: '"GTM Engineer" OR "RevOps Engineer" OR "Growth Engineer" automation Airtable OR Make OR Clay remote'
+    enabled: true
+
+  # -- Voice AI & Conversational AI --
+  - name: Voice AI — FDE & SA
+    query: 'site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com "Voice AI" OR "Conversational AI" OR "Speech" "Solutions" OR "Forward Deployed" OR "Customer Engineer"'
+    enabled: true
+
+  - name: Voice AI — AI Engineer
+    query: 'site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com "Voice" OR "Speech" "AI Engineer" OR "Deployment" OR "Integration"'
+    enabled: true
+
+  # -- Contact Center AI --
+  - name: Contact Center AI — SA & SE
+    query: '"contact center" OR "customer service" "AI" "Solutions Architect" OR "Solutions Engineer" OR "Forward Deployed" remote'
+    enabled: true
+
+  # -- FDE specific (cross-portal) --
+  - name: FDE & Deployed Engineer — All portals
+    query: '"Forward Deployed Engineer" OR "Deployed Engineer" OR "Deployment Engineer" AI site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com OR site:jobs.lever.co'
+    enabled: true
+
+  # -- RemoteFront (aggregator) --
+  - name: RemoteFront — AI & Automation
+    query: 'site:remotefront.com "AI Engineer" OR "Solutions Engineer" OR "Automation" OR "LLM" OR "Agent" remote'
+    enabled: true
+
+  # -- Defense & Cleared (ClearanceJobs) --
+  - name: ClearanceJobs — Program Analyst
+    query: 'site:clearancejobs.com "Program Analyst" OR "Intelligence Systems Analyst" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" OR "Buckley" OR "remote"'
+    enabled: true
+
+  - name: ClearanceJobs — Intelligence Analyst
+    query: 'site:clearancejobs.com "Intelligence Analyst" OR "All-Source Analyst" OR "ISR Analyst" "TS/SCI" "Colorado Springs" OR "Space Force" OR "remote"'
+    enabled: true
+
+  - name: ClearanceJobs — Curriculum / Instructor
+    query: 'site:clearancejobs.com "Curriculum Developer" OR "Technical Instructor" OR "Instructional Designer" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force"'
+    enabled: true
+
+  - name: ClearanceJobs — Space / SIGINT
+    query: 'site:clearancejobs.com "Space" OR "SIGINT" OR "ISR" "TS/SCI" "Colorado Springs" OR "Peterson SFB" OR "Schriever SFB" OR "Buckley SFB"'
+    enabled: true
+
+  - name: ClearanceJobs — Golden Dome / JADC2 / C3BM
+    query: 'site:clearancejobs.com "Golden Dome" OR "JADC2" OR "C3BM" OR "all-domain command and control" OR "command and control" "Colorado Springs" OR "Peterson" OR "Schriever" OR "Buckley"'
+    enabled: true
+
+  - name: ClearanceJobs — SDA / Recon / Mission Integration
+    query: 'site:clearancejobs.com "Space Development Agency" OR "SDA" OR "space-based reconnaissance" OR "mission integration" OR "warfighter integration" "Colorado Springs" OR "Peterson" OR "Schriever"'
+    enabled: true
+
+  - name: Indeed — Cleared Program Analyst Colorado Springs
+    query: 'site:indeed.com "Program Analyst" OR "Intelligence Analyst" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever"'
+    enabled: true
+
+  - name: LinkedIn — Cleared Analyst Colorado Springs
+    query: '"Program Analyst" OR "Intelligence Systems Analyst" "TS/SCI" "Colorado Springs" site:linkedin.com/jobs'
+    enabled: true
+
+  - name: LinkedIn — Space Force Civilian Colorado Springs
+    query: '"Space Force" OR "USSF" "GS-13" OR "GS-14" OR "civilian" "Colorado Springs" OR "Peterson" OR "Schriever" site:linkedin.com/jobs'
+    enabled: true
+
+  - name: LinkedIn — Golden Dome / JADC2 / C3BM Colorado Springs
+    query: '"Golden Dome" OR "JADC2" OR "C3BM" OR "all-domain command and control" OR "command and control" "Colorado Springs" OR "Peterson" OR "Schriever" site:linkedin.com/jobs'
+    enabled: true
+
+  - name: LinkedIn — Curriculum Instructional Design Cleared
+    query: '"Curriculum Developer" OR "Instructional Designer" OR "Training Developer" OR "Technical Instructor" "TS/SCI" "Colorado Springs" OR "Space Force" site:linkedin.com/jobs'
+    enabled: true
+
+  - name: LinkedIn — AI Solutions Architect Cleared
+    query: '"Solutions Architect" OR "AI Engineer" OR "Applied AI" "TS/SCI" OR "cleared" "Colorado Springs" OR "remote" site:linkedin.com/jobs'
+    enabled: true
+
+  - name: Work at a Startup — AI SA & FDE
+    query: 'site:workatastartup.com "Solutions Architect" OR "Forward Deployed" OR "AI Engineer" OR "Agentic" remote'
+    enabled: true
+
+  - name: Dice — Cleared AI & Analytics Colorado Springs
+    query: 'site:dice.com "AI" OR "Analytics" OR "Intelligence Analyst" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever"'
+    enabled: true
+
+  # -- AI/Data hybrid roles at defense primes (NEW) --
+  - name: ClearanceJobs — AI & Data Hybrid Cleared
+    query: 'site:clearancejobs.com "AI" OR "Artificial Intelligence" OR "Data Analyst" OR "Knowledge Management" OR "Digital Transformation" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" OR "remote"'
+    enabled: true
+
+  - name: ClearanceJobs — Emerging Tech & Applied AI Cleared
+    query: 'site:clearancejobs.com "Emerging Technology" OR "Applied AI" OR "AI Integration" OR "Analytics" OR "Technical Advisor" "TS/SCI" "Colorado Springs" OR "Space Force" OR "USSPACECOM"'
+    enabled: true
+
+  - name: Indeed — AI Data Hybrid Cleared Colorado Springs
+    query: 'site:indeed.com "AI" OR "data analyst" OR "knowledge management" "TS/SCI" "Colorado Springs" OR "Peterson SFB" OR "Schriever SFB"'
+    enabled: true
+
+  - name: LinkedIn — AI Integration Cleared Analyst
+    query: '"AI analyst" OR "AI integration" OR "applied AI" OR "data systems analyst" "TS/SCI" "Colorado Springs" OR "remote" site:linkedin.com/jobs'
+    enabled: true
+
+  # -- MITRE / FFRDC (NEW) --
+  - name: MITRE — Colorado Springs
+    query: 'site:careers.mitre.org "Colorado Springs" OR "Space" OR "USSPACECOM" "TS/SCI"'
+    enabled: true
+
+  - name: MITRE — Space / Intel SME
+    query: 'site:careers.mitre.org "space" OR "intelligence" OR "ISR" OR "SIGINT" OR "SME" "TS/SCI"'
+    enabled: true
+
+  - name: RAND — Cleared Analyst
+    query: 'site:rand.org/jobs "TS/SCI" OR "cleared" "analyst" OR "researcher" "Colorado" OR "remote"'
+    enabled: true
+
+  # -- USAJobs GS positions (NEW) --
+  - name: USAJobs — Intelligence Specialist GS Colorado Springs
+    query: 'site:usajobs.gov "Intelligence Specialist" OR "Intelligence Analyst" "Colorado Springs" OR "Peterson" OR "Schriever" "GS-13" OR "GS-14" OR "GG-13" OR "GG-14"'
+    enabled: true
+
+  - name: USAJobs — Program Analyst GS Colorado Springs
+    query: 'site:usajobs.gov "Program Analyst" "Colorado Springs" OR "Peterson SFB" OR "Schriever SFB" "GS-13" OR "GS-14" "TS/SCI"'
+    enabled: true
+
+  - name: USAJobs — Space Force Civilian Analyst
+    query: 'site:usajobs.gov "Space Force" OR "USSF" "Intelligence" OR "ISR" OR "Program Analyst" "Colorado Springs" "GS-12" OR "GS-13" OR "GS-14"'
+    enabled: true
+
+# -- Tracked companies --
+# Companies whose career pages are checked directly.
+# scan_method: playwright (default), websearch, greenhouse_api
+# For Greenhouse companies, add api: field for faster structured JSON access.
+
+tracked_companies:
+
+  # -- Defense primes & FFRDCs (cleared) --
+
+  - name: MITRE
+    careers_url: https://careers.mitre.org/us/en/search-results
+    scan_method: websearch
+    scan_query: 'site:careers.mitre.org "TS/SCI" ("Colorado Springs" OR "space" OR "intelligence" OR "ISR")'
+    notes: "FFRDC. Strong Space/SDA/intel work at Colorado Springs. Direct outreach preferred."
+    enabled: true
+
+  - name: Leidos
+    careers_url: https://careers.leidos.com
+    scan_method: websearch
+    scan_query: 'site:careers.leidos.com "TS/SCI" ("Colorado Springs" OR "Peterson" OR "Schriever") ("analyst" OR "AI" OR "intelligence")'
+    notes: "Large prime. Strong Space Force presence in COS."
+    enabled: true
+
+  - name: Noblis
+    careers_url: https://noblis.org/careers
+    scan_method: websearch
+    scan_query: 'site:noblis.org/careers "TS/SCI" "analyst" OR "intelligence" OR "AI" "Colorado" OR "remote"'
+    notes: "FFRDC-adjacent nonprofit. Strong cleared analytics work."
+    enabled: true
+
+  # -- AI Labs & LLM providers --
+
+  - name: Anthropic
+    careers_url: https://job-boards.greenhouse.io/anthropic
+    api: https://boards-api.greenhouse.io/v1/boards/anthropic/jobs
+    enabled: true
+
+  - name: OpenAI
+    careers_url: https://openai.com/careers
+    scan_method: websearch
+    scan_query: 'site:openai.com/careers "Solutions" OR "Forward Deployed" OR "AI Engineer"'
+    enabled: true
+
+  # -- Voice AI & Conversational AI --
+
+  - name: PolyAI
+    careers_url: https://job-boards.eu.greenhouse.io/polyai
+    api: https://boards-api.greenhouse.io/v1/boards/polyai/jobs
+    notes: "UK. Voice AI for enterprise contact centers."
+    enabled: true
+
+  - name: Parloa
+    careers_url: https://job-boards.eu.greenhouse.io/parloa
+    api: https://boards-api.greenhouse.io/v1/boards/parloa/jobs
+    notes: "Berlin EMEA. Voice AI enterprise."
+    enabled: true
+
+  - name: Intercom
+    careers_url: https://job-boards.greenhouse.io/intercom
+    api: https://boards-api.greenhouse.io/v1/boards/intercom/jobs
+    notes: "Dublin EMEA. Fin AI agent."
+    enabled: true
+
+  - name: Hume AI
+    careers_url: https://job-boards.greenhouse.io/humeai
+    api: https://boards-api.greenhouse.io/v1/boards/humeai/jobs
+    notes: "NYC. Empathic voice AI."
+    enabled: true
+
+  - name: ElevenLabs
+    careers_url: https://jobs.ashbyhq.com/elevenlabs
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/elevenlabs'
+    notes: "Voice AI TTS leader."
+    enabled: true
+
+  - name: Deepgram
+    careers_url: https://jobs.ashbyhq.com/deepgram
+    scan_method: websearch
+    scan_query: 'site:deepgram.com/careers OR "deepgram" "Solutions" OR "AI Engineer" site:jobs.ashbyhq.com'
+    notes: "STT/TTS APIs."
+    enabled: true
+
+  - name: Vapi
+    careers_url: https://jobs.ashbyhq.com/vapi
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/vapi'
+    notes: "Voice AI infrastructure."
+    enabled: true
+
+  - name: Bland AI
+    careers_url: https://jobs.ashbyhq.com/bland
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/bland'
+    notes: "Voice phone agents. $65M Series B."
+    enabled: true
+
+  # -- AI-native platforms (FDE/SA teams) --
+
+  - name: Retool
+    careers_url: https://retool.com/careers
+    scan_method: websearch
+    scan_query: 'site:retool.com/careers "Deployed" OR "AI" OR "Solutions"'
+    notes: "London. Popularized Deployed Engineer role."
+    enabled: true
+
+  - name: Airtable
+    careers_url: https://job-boards.greenhouse.io/airtable
+    api: https://boards-api.greenhouse.io/v1/boards/airtable/jobs
+    notes: "No-code + AI platform."
+    enabled: true
+
+  - name: Vercel
+    careers_url: https://job-boards.greenhouse.io/vercel
+    api: https://boards-api.greenhouse.io/v1/boards/vercel/jobs
+    notes: "AI SDK, v0.dev. Frontend AI tooling."
+    enabled: true
+
+  - name: Temporal
+    careers_url: https://job-boards.greenhouse.io/temporal
+    api: https://boards-api.greenhouse.io/v1/boards/temporal/jobs
+    notes: "Workflow orchestration."
+    enabled: true
+
+  - name: Arize AI
+    careers_url: https://job-boards.greenhouse.io/arizeai
+    api: https://boards-api.greenhouse.io/v1/boards/arizeai/jobs
+    notes: "LLMOps / AI observability."
+    enabled: true
+
+  - name: RunPod
+    careers_url: https://job-boards.greenhouse.io/runpod
+    api: https://boards-api.greenhouse.io/v1/boards/runpod/jobs
+    notes: "GPU cloud for AI."
+    enabled: true
+
+  - name: Glean
+    careers_url: https://job-boards.greenhouse.io/gleanwork
+    api: https://boards-api.greenhouse.io/v1/boards/gleanwork/jobs
+    notes: "Enterprise AI search."
+    enabled: true
+
+  # -- Contact Center AI & CX --
+
+  - name: Ada
+    careers_url: https://job-boards.greenhouse.io/ada
+    scan_method: websearch
+    scan_query: '"ada.cx" OR "ada" "AI" "Solutions" OR "Engineer" site:jobs.ashbyhq.com OR site:job-boards.greenhouse.io'
+    notes: "Toronto + remote. AI customer service."
+    enabled: true
+
+  - name: LivePerson
+    careers_url: https://liveperson.com/company/careers
+    scan_method: websearch
+    scan_query: 'site:liveperson.com/careers OR "liveperson" "Solutions" OR "AI" site:job-boards.greenhouse.io'
+    notes: "Remote EMEA. Conversational AI enterprise."
+    enabled: true
+
+  - name: Sierra
+    careers_url: https://jobs.ashbyhq.com/sierra
+    scan_method: websearch
+    scan_query: '"sierra.ai" "AI" "Forward Deployed" OR "Applied" OR "Solutions" site:jobs.ashbyhq.com'
+    notes: "Bret Taylor (ex-CEO Salesforce). AI customer agents."
+    enabled: true
+
+  - name: Decagon
+    careers_url: https://jobs.ashbyhq.com/decagon
+    scan_method: websearch
+    scan_query: '"decagon" "AI" "Forward Deployed" OR "Solutions" site:jobs.ashbyhq.com'
+    notes: "AI customer support agents."
+    enabled: true
+
+  # -- Enterprise comms & contact center --
+
+  - name: Talkdesk
+    careers_url: https://www.talkdesk.com/careers
+    scan_method: websearch
+    scan_query: 'site:talkdesk.com/careers "AI" OR "Solutions Architect" OR "AI Engineer"'
+    notes: "Lisbon. Contact center AI. EMEA friendly."
+    enabled: true
+
+  - name: Twilio
+    careers_url: https://www.twilio.com/en-us/company/jobs
+    scan_method: websearch
+    scan_query: 'site:twilio.com/company/jobs "AI" OR "Voice" "Solutions" OR "Architect"'
+    notes: "Voice/messaging infrastructure."
+    enabled: true
+
+  - name: Dialpad
+    careers_url: https://www.dialpad.com/careers
+    scan_method: websearch
+    scan_query: '"dialpad" "AI" "Solutions" OR "Engineer" site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com'
+    notes: "Voice AI for business comms."
+    enabled: true
+
+  - name: Gong
+    careers_url: https://www.gong.io/careers
+    scan_method: websearch
+    scan_query: 'site:gong.io/careers "AI" OR "Solutions" OR "Architect"'
+    notes: "Revenue intelligence with voice AI."
+    enabled: true
+
+  - name: Genesys
+    careers_url: https://www.genesys.com/careers
+    scan_method: websearch
+    scan_query: 'site:genesys.com/careers "AI" "Solutions Architect" OR "AI Engineer"'
+    notes: "Contact center cloud + AI."
+    enabled: true
+
+  - name: Salesforce
+    careers_url: https://careers.salesforce.com
+    scan_method: websearch
+    scan_query: 'site:careers.salesforce.com "Forward Deployed" OR "AI Engineer" OR "Agentforce"'
+    notes: "Agentforce = AI agents platform."
+    enabled: true
+
+  # -- AI infra & LLMOps --
+
+  - name: Langfuse
+    careers_url: https://langfuse.com/careers
+    scan_method: websearch
+    scan_query: '"langfuse" careers OR jobs "engineer" OR "solutions"'
+    notes: "Berlin. LLMOps / observability."
+    enabled: true
+
+  - name: Lindy
+    careers_url: https://jobs.ashbyhq.com/lindy
+    scan_method: websearch
+    scan_query: '"lindy.ai" "AI" "Forward Deployed" OR "Solutions" site:jobs.ashbyhq.com'
+    notes: "AI agent management platform."
+    enabled: true
+
+  - name: Cognigy
+    careers_url: https://careers.cognigy.com
+    scan_method: websearch
+    scan_query: '"cognigy" careers "AI" OR "Solutions" OR "Engineer"'
+    notes: "Dusseldorf EMEA. Conversational AI enterprise."
+    enabled: true
+
+  - name: Speechmatics
+    careers_url: https://job-boards.greenhouse.io/speechmatics
+    api: https://boards-api.greenhouse.io/v1/boards/speechmatics/jobs
+    notes: "Cambridge UK. Speech recognition platform."
+    enabled: true
+
+  # -- No-Code/Low-Code & Automation --
+
+  - name: n8n
+    careers_url: https://jobs.ashbyhq.com/n8n
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/n8n'
+    notes: "Berlin + remote EU/US. Workflow automation."
+    enabled: true
+
+  - name: Zapier
+    careers_url: https://jobs.ashbyhq.com/zapier
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/zapier'
+    notes: "Remote-first. Automation platform leader."
+    enabled: true
+
+  - name: Make.com (Celonis)
+    careers_url: https://www.make.com/en/careers
+    scan_method: websearch
+    scan_query: 'site:make.com/en/careers OR "make.com" "engineer" OR "solutions" site:jobs.ashbyhq.com'
+    notes: "Celonis parent company. Automation platform."
+    enabled: true
+
+  # -- Ashby-based (Playwright direct) --
+
+  - name: Cohere
+    careers_url: https://jobs.ashbyhq.com/cohere
+    notes: "AI/LLM provider. Toronto + remote."
+    enabled: true
+
+  - name: LangChain
+    careers_url: https://jobs.ashbyhq.com/langchain
+    notes: "LangChain/LangSmith framework."
+    enabled: true
+
+  - name: Pinecone
+    careers_url: https://jobs.ashbyhq.com/pinecone
+    notes: "Vector database."
+    enabled: true
+
+  # -- Lever-based (Playwright direct) --
+
+  - name: Mistral AI
+    careers_url: https://jobs.lever.co/mistral
+    notes: "Paris. European AI lab."
+    enabled: true
+
+  - name: Weights & Biases
+    careers_url: https://www.coreweave.com/careers/weights-biases
+    scan_method: websearch
+    scan_query: 'site:coreweave.com/careers/weights-biases OR site:wf.coreweave.com/careers/weights-biases "Weights & Biases" "Software Engineer" OR "AI" OR "MLOps"'
+    notes: "MLOps platform. Acquired by CoreWeave; W&B openings now live on CoreWeave careers."
+    enabled: true
+
+  # -- European tech (EMEA-friendly) --
+
+  - name: Factorial
+    careers_url: https://job-boards.greenhouse.io/factorial
+    scan_method: websearch
+    scan_query: 'site:jobs.greenhouse.io/factorial'
+    notes: "Barcelona. HR SaaS unicorn."
+    enabled: true
+
+  - name: Attio
+    careers_url: https://jobs.ashbyhq.com/attio
+    scan_method: websearch
+    scan_query: 'site:attio.com/careers OR site:jobs.ashbyhq.com/attio'
+    notes: "Remote EU. AI-native CRM. Series B $52M."
+    enabled: true
+
+  - name: Tinybird
+    careers_url: https://jobs.ashbyhq.com/tinybird
+    scan_method: websearch
+    scan_query: 'site:tinybird.co/careers OR site:jobs.ashbyhq.com/tinybird'
+    notes: "Remote. Real-time data platform."
+    enabled: true
+
+  - name: Clarity AI
+    careers_url: https://jobs.lever.co/clarity-ai
+    scan_method: websearch
+    scan_query: 'site:clarity.ai/careers OR site:jobs.lever.co/clarity-ai'
+    notes: "Madrid/Remote. Sustainability analytics with AI."
+    enabled: true
+
+  - name: Travelperk
+    careers_url: https://jobs.ashbyhq.com/travelperk
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/travelperk'
+    notes: "Barcelona. Business travel unicorn."
+    enabled: true
+
+  # -- DACH & European AI ecosystem --
+  # All entries below have been verified against the Greenhouse / Ashby /
+  # Lever / Workable APIs or live job boards. Greenhouse boards expose a
+  # JSON API at https://boards-api.greenhouse.io/v1/boards/{slug}/jobs which
+  # the scanner can hit directly via the api: field.
+
+  # -- DACH AI labs & frontier model providers --
+
+  - name: Aleph Alpha
+    careers_url: https://jobs.ashbyhq.com/AlephAlpha
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/AlephAlpha'
+    notes: "Heidelberg DE. Sovereign European LLM provider, enterprise & government focus."
+    enabled: true
+
+  - name: DeepL
+    careers_url: https://jobs.ashbyhq.com/DeepL
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/DeepL'
+    notes: "Cologne DE. Translation & language AI. 60+ open roles, EU/DACH heavy."
+    enabled: true
+
+  - name: Black Forest Labs
+    careers_url: https://job-boards.greenhouse.io/blackforestlabs
+    api: https://boards-api.greenhouse.io/v1/boards/blackforestlabs/jobs
+    notes: "Freiburg DE / SF. FLUX image models, ex-Stable Diffusion team."
+    enabled: true
+
+  - name: Helsing
+    careers_url: https://job-boards.greenhouse.io/helsing
+    api: https://boards-api.greenhouse.io/v1/boards/helsing/jobs
+    notes: "Munich / Berlin / London / Paris. Defence AI unicorn. 100+ roles, ML & FDE."
+    enabled: true
+
+  # -- DACH enterprise & SaaS (AI-heavy) --
+
+  - name: Celonis
+    careers_url: https://job-boards.greenhouse.io/celonis
+    api: https://boards-api.greenhouse.io/v1/boards/celonis/jobs
+    notes: "Munich / NYC. Process intelligence, Applied AI Engineer roles, Field CTOs."
+    enabled: true
+
+  - name: Contentful
+    careers_url: https://job-boards.greenhouse.io/contentful
+    api: https://boards-api.greenhouse.io/v1/boards/contentful/jobs
+    notes: "Berlin / Denver. Headless CMS, AI content workflows."
+    enabled: true
+
+  - name: GetYourGuide
+    careers_url: https://job-boards.greenhouse.io/getyourguide
+    api: https://boards-api.greenhouse.io/v1/boards/getyourguide/jobs
+    notes: "Berlin. Travel marketplace, ML & data platform roles."
+    enabled: true
+
+  - name: HelloFresh
+    careers_url: https://job-boards.greenhouse.io/hellofresh
+    api: https://boards-api.greenhouse.io/v1/boards/hellofresh/jobs
+    notes: "Berlin. Meal kit unicorn, large data/ML org."
+    enabled: true
+
+  # -- DACH fintech --
+
+  - name: N26
+    careers_url: https://job-boards.greenhouse.io/n26
+    api: https://boards-api.greenhouse.io/v1/boards/n26/jobs
+    notes: "Berlin / Barcelona. Mobile bank, ~50 roles, ML & risk."
+    enabled: true
+
+  - name: Trade Republic
+    careers_url: https://job-boards.greenhouse.io/traderepublicbank
+    api: https://boards-api.greenhouse.io/v1/boards/traderepublicbank/jobs
+    notes: "Berlin / London / Paris. Neobroker, ~50 roles, platform & data."
+    enabled: true
+
+  - name: SumUp
+    careers_url: https://job-boards.greenhouse.io/sumup
+    api: https://boards-api.greenhouse.io/v1/boards/sumup/jobs
+    notes: "Berlin / London. Payments fintech, EU + LATAM hiring."
+    enabled: true
+
+  - name: Qonto
+    careers_url: https://jobs.lever.co/qonto
+    notes: "Paris / Berlin / Barcelona / Milan. SMB neobank, MLOps for AI Product roles."
+    enabled: true
+
+  # -- DACH logistics / mobility --
+
+  - name: Forto
+    careers_url: https://careers.forto.com/forto-jobs/
+    notes: "Berlin DE. Digital freight forwarder, product & data roles, German + English."
+    enabled: true
+
+  # -- Switzerland / Austria AI --
+
+  - name: Lakera
+    careers_url: https://jobs.ashbyhq.com/lakera.ai
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/lakera.ai'
+    notes: "Zurich CH / SF. AI security & guardrails. Has Forward Deployed Engineer roles."
+    enabled: true
+
+  - name: Scandit
+    careers_url: https://job-boards.greenhouse.io/scandit
+    api: https://boards-api.greenhouse.io/v1/boards/scandit/jobs
+    notes: "Zurich CH. Computer vision / smart data capture, ML roles."
+    enabled: true
+
+  - name: Cradle
+    careers_url: https://jobs.ashbyhq.com/cradlebio
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/cradlebio'
+    notes: "Zurich CH / Amsterdam. AI-guided protein design, ML researcher roles."
+    enabled: true
+
+  # -- France AI ecosystem --
+
+  - name: Hugging Face
+    careers_url: https://apply.workable.com/huggingface/
+    scan_method: websearch
+    scan_query: 'site:apply.workable.com/huggingface'
+    notes: "Paris / NYC / Remote. ML hub & open-source models."
+    enabled: true
+
+  - name: Photoroom
+    careers_url: https://jobs.ashbyhq.com/photoroom
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/photoroom'
+    notes: "Paris FR. AI photo editor, Head of CV / Head of ML roles."
+    enabled: true
+
+  - name: Pigment
+    careers_url: https://jobs.lever.co/pigment
+    notes: "Paris FR / NYC / London. AI-powered FP&A planning platform."
+    enabled: true
+
+  # -- UK & Ireland AI (EU-friendly hiring) --
+
+  - name: Wayve
+    careers_url: https://job-boards.greenhouse.io/wayve
+    api: https://boards-api.greenhouse.io/v1/boards/wayve/jobs
+    notes: "London UK. Embodied AI for self-driving, ML & robotics roles."
+    enabled: true
+
+  - name: Isomorphic Labs
+    careers_url: https://job-boards.greenhouse.io/isomorphiclabs
+    api: https://boards-api.greenhouse.io/v1/boards/isomorphiclabs/jobs
+    notes: "London / Lausanne / Cambridge MA. DeepMind spin-out for drug discovery AI."
+    enabled: true
+
+  - name: PhysicsX
+    careers_url: https://job-boards.greenhouse.io/physicsx
+    api: https://boards-api.greenhouse.io/v1/boards/physicsx/jobs
+    notes: "London UK. Physics-informed ML for engineering, ~40 roles."
+    enabled: true
+
+  - name: Stability AI
+    careers_url: https://job-boards.greenhouse.io/stabilityai
+    api: https://boards-api.greenhouse.io/v1/boards/stabilityai/jobs
+    notes: "London / SF. Generative AI image/video research lab."
+    enabled: true
+
+  - name: Synthesia
+    careers_url: https://jobs.ashbyhq.com/synthesia
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/synthesia OR site:job-boards.greenhouse.io/synthesia'
+    notes: "London UK. AI video generation for enterprise, $4B valuation."
+    enabled: true
+
+  - name: Faculty
+    careers_url: https://jobs.ashbyhq.com/faculty
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/faculty'
+    notes: "London UK. Applied AI consultancy. 80+ roles, AI Safety / MLE / Delivery."
+    enabled: true
+
+  - name: Causaly
+    careers_url: https://jobs.ashbyhq.com/causaly
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/causaly'
+    notes: "London / Athens. Biomedical knowledge graph + AI."
+    enabled: true
+
+  # -- Nordics AI --
+
+  - name: Lovable
+    careers_url: https://jobs.ashbyhq.com/lovable
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/lovable'
+    notes: "Stockholm SE. AI app builder (text-to-app), 80+ open roles."
+    enabled: true
+
+  - name: Legora
+    careers_url: https://jobs.ashbyhq.com/legora
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/legora'
+    notes: "Stockholm SE / NYC / London. AI-native legal workspace."
+    enabled: true
+
+  - name: Spotify
+    careers_url: https://jobs.lever.co/spotify
+    notes: "Stockholm SE / NYC / London. Audio platform, large ML/personalization org."
+    enabled: true
+
+  - name: Vinted
+    careers_url: https://careers.vinted.com/jobs
+    notes: "Vilnius LT / Berlin. C2C marketplace unicorn, data science & ML roles."
+    enabled: true
+
+  # -- Iberia AI --
+
+  - name: Amplemarket
+    careers_url: https://job-boards.greenhouse.io/amplemarket
+    api: https://boards-api.greenhouse.io/v1/boards/amplemarket/jobs
+    notes: "Lisbon PT / Remote. AI-native sales platform."
+    enabled: true
+
+  # ============================================================
+  # -- Defense Primes & Cleared Contractors --
+  # Targeting: Program Analyst, Intelligence Systems Analyst,
+  # Senior Analyst, Curriculum Developer, Technical Instructor.
+  # All require or prefer TS/SCI. Colorado Springs area preferred.
+  # ============================================================
+
+  # -- Big-4 Intel & Defense primes --
+
+  - name: Leidos
+    careers_url: https://careers.leidos.com/search
+    scan_method: websearch
+    scan_query: '"Leidos" "Program Analyst" OR "Intelligence Analyst" OR "Systems Analyst" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" OR "Buckley" site:clearancejobs.com OR site:leidos.com'
+    notes: "Reston VA / COS. Massive cleared intel & space portfolio. Peterson SFB, Schriever SFB work. Strong TS/SCI hiring."
+    enabled: true
+
+  - name: SAIC
+    careers_url: https://jobs.saic.com
+    scan_method: websearch
+    scan_query: '"SAIC" "Program Analyst" OR "Intelligence Analyst" OR "ISR" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:jobs.saic.com'
+    notes: "Reston VA / COS. Major Space Force and intel contractor. Strong Colorado Springs presence."
+    enabled: true
+
+  - name: CACI International
+    careers_url: https://jobs.caci.com
+    scan_method: websearch
+    scan_query: '"CACI" "Program Analyst" OR "Intelligence Analyst" OR "ISR" OR "SIGINT" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" site:clearancejobs.com OR site:jobs.caci.com'
+    notes: "Arlington VA / COS. Strong ISR, SIGINT, and intel analysis contracts. Peterson and Schriever SFB presence."
+    enabled: true
+
+  - name: Booz Allen Hamilton
+    careers_url: https://careers.boozallen.com
+    scan_method: websearch
+    scan_query: '"Booz Allen" "Program Analyst" OR "Intelligence Analyst" OR "Systems Analyst" "TS/SCI" "Colorado Springs" OR "Space Force" OR "SPACECOM" site:clearancejobs.com OR site:careers.boozallen.com'
+    notes: "McLean VA / COS. Large Space Force and intel support portfolio. Colorado Springs office."
+    enabled: true
+
+  - name: Peraton
+    careers_url: https://www.peraton.com/careers
+    scan_method: websearch
+    scan_query: '"Peraton" "Program Analyst" OR "Intelligence Analyst" OR "ISR" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:peraton.com'
+    notes: "Herndon VA / COS. Intel, space, ISR contracts. Formerly part of Northrop Grumman IT."
+    enabled: true
+
+  - name: ManTech International
+    careers_url: https://www.mantech.com/careers
+    scan_method: websearch
+    scan_query: '"ManTech" "Program Analyst" OR "Intelligence Analyst" OR "ISR" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" site:clearancejobs.com OR site:mantech.com'
+    notes: "Herndon VA / COS. Intelligence and cyber contracts. Colorado Springs footprint."
+    enabled: true
+
+  - name: Jacobs Engineering
+    careers_url: https://careers.jacobs.com
+    scan_method: websearch
+    scan_query: '"Jacobs" "Program Analyst" OR "Intelligence Analyst" OR "Systems Analyst" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:careers.jacobs.com'
+    notes: "Dallas TX / COS. Strong space and intelligence support. Colorado Springs presence via NORAD/NORTHCOM and Space Force contracts."
+    enabled: true
+
+  - name: KBR Inc
+    careers_url: https://kbr.com/en/careers
+    scan_method: websearch
+    scan_query: '"KBR" "Program Analyst" OR "Intelligence Analyst" OR "Training" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:kbr.com'
+    notes: "Houston TX / COS. Government services and Space Force contractor. Colorado Springs office."
+    enabled: true
+
+  - name: L3Harris Technologies
+    careers_url: https://careers.l3harris.com
+    scan_method: websearch
+    scan_query: '"L3Harris" "Program Analyst" OR "Intelligence" OR "ISR" OR "Systems Analyst" "TS/SCI" "Colorado Springs" OR "Space" site:clearancejobs.com OR site:careers.l3harris.com'
+    notes: "Melbourne FL / COS. ISR systems, space, and intel products. Local Colorado Springs presence."
+    enabled: true
+
+  - name: Northrop Grumman
+    careers_url: https://www.northropgrumman.com/careers
+    scan_method: websearch
+    scan_query: '"Northrop Grumman" "Program Analyst" OR "Intelligence Analyst" OR "Space" OR "ISR" "TS/SCI" "Colorado Springs" OR "Schriever" OR "Peterson" site:clearancejobs.com OR site:northropgrumman.com'
+    notes: "Falls Church VA / COS. Major space and ISR systems integrator. Schriever SFB presence."
+    enabled: true
+
+  - name: General Dynamics IT (GDIT)
+    careers_url: https://careers.gdit.com
+    scan_method: websearch
+    scan_query: '"General Dynamics" OR "GDIT" "Program Analyst" OR "Intelligence Analyst" OR "ISR" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:careers.gdit.com'
+    notes: "Fairfax VA / COS. Large IT and intelligence services. Multiple COS contracts."
+    enabled: true
+
+  - name: Raytheon Technologies (RTX)
+    careers_url: https://jobs.rtx.com
+    scan_method: websearch
+    scan_query: '"Raytheon" OR "RTX" "Program Analyst" OR "Intelligence" OR "Space" OR "ISR" "TS/SCI" "Colorado Springs" OR "Schriever" site:clearancejobs.com OR site:jobs.rtx.com'
+    notes: "Waltham MA / COS. Space systems and intel sensor programs. Schriever and Peterson area."
+    enabled: true
+
+  - name: Lockheed Martin
+    careers_url: https://www.lockheedmartinjobs.com
+    scan_method: websearch
+    scan_query: '"Lockheed Martin" "Program Analyst" OR "Intelligence" OR "Space" OR "ISR" "TS/SCI" "Colorado Springs" OR "Schriever" OR "Space Force" site:clearancejobs.com OR site:lockheedmartinjobs.com'
+    notes: "Bethesda MD / COS. Major space and missile systems. Strong Colorado Springs presence."
+    enabled: true
+
+  - name: BAE Systems
+    careers_url: https://jobs.baesystems.com
+    scan_method: websearch
+    scan_query: '"BAE Systems" "Program Analyst" OR "Intelligence Analyst" OR "ISR" "TS/SCI" "Colorado Springs" OR "Space" site:clearancejobs.com OR site:jobs.baesystems.com'
+    notes: "Falls Church VA / COS. Intel systems and space products (absorbed Ball Aerospace)."
+    enabled: true
+
+  # -- Mid-tier cleared contractors (strong COS presence) --
+
+  - name: Parsons Corporation
+    careers_url: https://parsons.com/careers
+    scan_method: websearch
+    scan_query: '"Parsons" "Program Analyst" OR "Intelligence Analyst" OR "Space" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Schriever" site:clearancejobs.com OR site:parsons.com'
+    notes: "Centreville VA / COS. Space and missile defense programs. Colorado Springs office."
+    enabled: true
+
+  - name: Amentum
+    careers_url: https://careers.amentum.com
+    scan_method: websearch
+    scan_query: '"Amentum" "Program Analyst" OR "Intelligence Analyst" OR "Training" "TS/SCI" "Colorado Springs" OR "Peterson" OR "Space Force" site:clearancejobs.com OR site:careers.amentum.com'
+    notes: "Germantown MD / COS. Formerly Vectrus + AECOM government. Strong COS footprint."
+    enabled: true
+
+  - name: Akima
+    careers_url: https://akima.com/careers
+    scan_method: websearch
+    scan_query: '"Akima" "Program Analyst" OR "Intelligence" OR "Instructor" "TS/SCI" "Colorado Springs" OR "Peterson" site:clearancejobs.com OR site:akima.com'
+    notes: "Herndon VA / COS. Alaska Native Corporation. Active Peterson SFB presence."
+    enabled: true
+
+  - name: CGS Federal
+    careers_url: https://jobs.lever.co/cgsfederal
+    notes: "Federal contracting and IT services. Lever board."
+    enabled: true
+
+  - name: MITRE Corporation
+    careers_url: https://careers.mitre.org
+    scan_method: websearch
+    scan_query: '"MITRE" "Program Analyst" OR "Intelligence Analyst" OR "Systems Analyst" "TS/SCI" "Colorado Springs" OR "Space" site:clearancejobs.com OR site:careers.mitre.org'
+    notes: "McLean VA / COS. Non-profit FFRDC. Deep space and intel work. No profit motive — mission-driven."
+    enabled: true
+
+  - name: Aerospace Corporation
+    careers_url: https://aerospace.org/careers
+    scan_method: websearch
+    scan_query: '"Aerospace Corporation" "Analyst" OR "Systems Engineer" OR "Intelligence" "TS/SCI" "Colorado Springs" OR "El Segundo" site:clearancejobs.com OR site:aerospace.org'
+    notes: "El Segundo CA / COS. FFRDC for Space Force. Peterson and Schriever SFB. Strong space domain expertise match."
+    enabled: true
+
+  # -- Space Force / Space domain specialists --
+
+  - name: Kratos Defense
+    careers_url: https://www.kratosdefense.com/about/careers
+    scan_method: websearch
+    scan_query: '"Kratos" "Analyst" OR "Intelligence" OR "Space" "TS/SCI" "Colorado Springs" OR "Space Force" site:clearancejobs.com OR site:kratosdefense.com'
+    notes: "San Diego CA / COS. Space and satellite systems. Colorado Springs office."
+    enabled: true
+
+  - name: Slingshot Aerospace
+    careers_url: https://jobs.lever.co/slingshotaerospace
+    scan_method: websearch
+    scan_query: '"Slingshot Aerospace" "Analyst" OR "Intelligence" OR "Space Domain" "TS/SCI" site:clearancejobs.com OR site:jobs.lever.co/slingshotaerospace'
+    notes: "El Segundo CA / COS. Space domain awareness and SDA analytics. Growing. Colorado Springs HQ presence."
+    enabled: true
+
+  - name: SpiderOak Mission Technologies
+    careers_url: https://spideroak.com/careers
+    scan_method: websearch
+    scan_query: '"SpiderOak" "Analyst" OR "Space" OR "Intelligence" "TS/SCI" "Colorado Springs" site:clearancejobs.com OR site:spideroak.com'
+    notes: "Overland Park KS / COS. Secure space communications and SDA."
+    enabled: true
+
+  - name: ExoAnalytic Solutions
+    careers_url: https://exoanalytic.com/careers
+    scan_method: websearch
+    scan_query: '"ExoAnalytic" "Analyst" OR "Space Domain" OR "Intelligence" "TS/SCI" "Colorado Springs" site:clearancejobs.com'
+    notes: "Irvine CA / COS. Space Domain Awareness. Commercial SDA analytics. Strong COS presence."
+    enabled: true
+
+  - name: United Launch Alliance (ULA)
+    careers_url: https://www.ulalaunch.com/careers
+    scan_method: websearch
+    scan_query: '"ULA" OR "United Launch Alliance" "Analyst" OR "Program" "TS/SCI" "Colorado Springs" OR "Centennial" site:clearancejobs.com OR site:ulalaunch.com'
+    notes: "Centennial CO (near COS). Launch services. TS/SCI roles in mission planning and ops."
+    enabled: true
+
+  # -- Training / Curriculum / Instructional Design (defense) --
+
+  - name: DynCorp International (Amentum)
+    careers_url: https://careers.amentum.com
+    scan_method: websearch
+    scan_query: '"DynCorp" OR "Amentum" "Instructor" OR "Curriculum" OR "Training Developer" "TS/SCI" "Colorado Springs" OR "Peterson" site:clearancejobs.com'
+    notes: "Now part of Amentum. Training and logistics contracts at Peterson and other COS installations."
+    enabled: true
+
+  - name: Engility (now SAIC)
+    careers_url: https://jobs.saic.com
+    scan_method: websearch
+    scan_query: '"SAIC" "Instructor" OR "Curriculum Developer" OR "Training" "TS/SCI" "Colorado Springs" OR "Space Force" site:clearancejobs.com OR site:jobs.saic.com'
+    notes: "Absorbed into SAIC. Training and curriculum contracts at Space Force and intel installations."
+    enabled: true
+
+  - name: Torch Technologies
+    careers_url: https://torchtechnologies.com/careers
+    scan_method: websearch
+    scan_query: '"Torch Technologies" "Analyst" OR "Intelligence" OR "Space" "TS/SCI" "Colorado Springs" OR "Huntsville" site:clearancejobs.com OR site:torchtechnologies.com'
+    notes: "Huntsville AL / COS. Employee-owned. Missile defense and space systems. Colorado Springs office."
+    enabled: true
+
+  - name: Aleut Federal
+    careers_url: https://www.aleutfederal.com/careers
+    scan_method: websearch
+    scan_query: '"Aleut Federal" "Instructor" OR "Analyst" OR "Intelligence" "TS/SCI" "Colorado Springs" OR "Peterson" site:clearancejobs.com OR site:aleutfederal.com'
+    notes: "Current employer. Alaska Native Corporation. Track internal postings for advancement or lateral moves."
+    enabled: true
+
+  - name: STI-tec
+    careers_url: https://sti-tec.com/careers
+    scan_method: websearch
+    scan_query: '"STI-tec" "Instructor" OR "Analyst" OR "Intelligence" "TS/SCI" "San Angelo" OR "Colorado Springs" site:clearancejobs.com'
+    notes: "Former employer. Track for reference or return opportunities."
+    enabled: true
+
+  - name: Chenega Corporation
+    careers_url: https://chenega.com/careers
+    scan_method: websearch
+    scan_query: '"Chenega" "Instructor" OR "Analyst" OR "Intelligence" OR "Curriculum" "TS/SCI" "Colorado Springs" OR "Goodfellow" site:clearancejobs.com OR site:chenega.com'
+    notes: "Former employer. Alaska Native Corporation. Track for COS-area openings."
+    enabled: true
+
+  # -- INTECON / Contingency (active lead) --
+
+  - name: INTECON LLC
+    careers_url: https://inteconsolutions.com/careers
+    scan_method: websearch
+    scan_query: '"INTECON" "Analyst" OR "Intelligence" OR "Program Manager" "TS/SCI" "Buckley" OR "Aurora" OR "Colorado" site:clearancejobs.com'
+    notes: "Active contingent offer (HEMP Program Manager, Buckley SFB, $150K-$180K). Track for award status and related postings."
+    enabled: true
+
+  - name: Raptor Enterprises
+    careers_url: https://raptorenterprises.com/careers
+    scan_method: websearch
+    scan_query: '"Raptor Enterprises" "Analyst" OR "Intelligence" "TS/SCI" "Colorado Springs" site:clearancejobs.com'
+    notes: "Dennis Parker contact. Track postings relevant to active networking relationship."
+    enabled: true
+
+  # -- Government consulting / Big-4 Federal (AI + cleared) --
+
+  - name: Accenture Federal Services
+    careers_url: https://www.accenturefederal.com/careers
+    scan_method: websearch
+    scan_query: '"Accenture Federal" "AI" OR "Artificial Intelligence" OR "Digital Transformation" OR "Program Analyst" OR "Solutions Architect" "TS/SCI" "Colorado Springs" OR "remote" site:clearancejobs.com OR site:accenturefederal.com'
+    notes: "Arlington VA / COS. Large cleared AI/digital transformation portfolio. Aggressive AI integration hiring."
+    enabled: true
+
+  - name: Deloitte Government & Public Services
+    careers_url: https://jobs2.deloitte.com/us/en/c/government-public-services-jobs
+    scan_method: websearch
+    scan_query: '"Deloitte" "AI" OR "Artificial Intelligence" OR "Digital Transformation" OR "Program Analyst" "TS/SCI" "Colorado Springs" OR "Space Force" OR "remote" site:clearancejobs.com OR site:jobs2.deloitte.com'
+    notes: "DC / COS. Strong cleared AI/digital transformation practice. Space Force and intel community contracts."
+    enabled: true
+
+  - name: LMI (Logistics Management Institute)
+    careers_url: https://careers-lmi.icims.com/jobs/search?ss=1&searchLocation=12781-12790-Colorado+Springs
+    scan_method: rendered
+    location_filter: false
+    scan_query: '"LMI" OR "Logistics Management Institute" "Analyst" OR "Intelligence" OR "Program" OR "Software Engineer" "TS/SCI" "Colorado Springs" OR "Space Force" site:careers-lmi.icims.com'
+    notes: "Tysons VA / COS. FFRDC-adjacent nonprofit. Strong Space Force ties and management consulting for DoD."
+    enabled: true
+
+  - name: Analytical Services (ANSER)
+    careers_url: https://www.anser.org/careers
+    scan_method: websearch
+    scan_query: '"ANSER" OR "Analytical Services" "Analyst" OR "Systems Analyst" OR "Intelligence" "TS/SCI" "Colorado Springs" OR "Space" site:clearancejobs.com OR site:anser.org'
+    notes: "Arlington VA / COS. FFRDC supporting DoD and Space Force. Mission-focused, no profit motive."
+    enabled: true
+
+  # -- AI/Tech: Enterprise AI & SA-heavy companies --
+
+  - name: Writer
+    careers_url: https://jobs.ashbyhq.com/writer
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/writer'
+    notes: "SF / Remote. Enterprise generative AI platform. Active Solutions Architect and Applied AI team."
+    enabled: true
+
+  - name: Moveworks
+    careers_url: https://job-boards.greenhouse.io/moveworks
+    api: https://boards-api.greenhouse.io/v1/boards/moveworks/jobs
+    notes: "Mountain View / Remote. IT automation AI. Strong SA/solutions engineering team."
+    enabled: true
+
+  - name: Five9
+    careers_url: https://www.five9.com/about/careers
+    scan_method: websearch
+    scan_query: '"Five9" "AI" OR "Solutions Architect" OR "Solutions Engineer" OR "Contact Center" site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com OR site:five9.com/about/careers'
+    notes: "San Ramon / Remote. Cloud contact center + AI. Competes with Genesys and Talkdesk."
+    enabled: true
+
+  - name: NICE CXone
+    careers_url: https://www.nice.com/about/careers
+    scan_method: websearch
+    scan_query: '"NICE" OR "NICE CXone" "AI" OR "Solutions Architect" OR "Solutions Engineer" "contact center" site:clearancejobs.com OR site:nice.com/about/careers OR site:job-boards.greenhouse.io'
+    notes: "Hoboken NJ / Remote. Enterprise contact center AI. CXone platform. Large SA org."
+    enabled: true
+
+  - name: Scale AI
+    careers_url: https://jobs.ashbyhq.com/scaleai
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/scaleai "Solutions" OR "Deployed" OR "Applied" OR "AI Engineer"'
+    notes: "SF / Remote. AI data platform. Has Forward Deployed and Applied AI roles."
+    enabled: true
+
+  - name: Observe AI
+    careers_url: https://jobs.ashbyhq.com/observeai
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/observeai OR "Observe.AI" "Solutions" OR "AI Engineer" OR "Product Manager"'
+    notes: "SF / Remote. Contact center AI analytics. SA and SE roles."
+    enabled: true
+
+  # -- Job boards / aggregators (new sources) --
+
+  - name: Work at a Startup (YC)
+    careers_url: https://www.workatastartup.com/jobs
+    scan_method: websearch
+    scan_query: 'site:workatastartup.com "AI" OR "LLM" OR "Solutions Architect" OR "Forward Deployed" OR "Agentic" remote'
+    notes: "Y Combinator job board. Strong AI startup coverage not on Ashby/Greenhouse/Lever."
+    enabled: true
+
+  - name: Dice — Cleared Tech
+    careers_url: https://www.dice.com/jobs
+    scan_method: websearch
+    scan_query: 'site:dice.com "TS/SCI" "AI" OR "Intelligence Analyst" OR "Program Analyst" OR "Systems Analyst" "Colorado Springs" OR "remote"'
+    notes: "Tech/cleared job aggregator. Complements ClearanceJobs for IT-adjacent cleared roles."
+    enabled: true
+
+  - name: Intelligence Careers (IC Portal)
+    careers_url: https://www.intelligencecareers.gov/icjobs
+    scan_method: websearch
+    scan_query: 'site:intelligencecareers.gov "Analyst" OR "Intelligence" OR "Program" "Colorado Springs" OR "Space" OR "remote"'
+    notes: "IC official hiring portal. Surfaces GS positions from NSA, DIA, NRO, NGA that may not reach USAJobs promptly."
+    enabled: true

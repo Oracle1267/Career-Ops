@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career-Ops Fit Dashboard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101416;
+      --panel: #171d20;
+      --panel-2: #1f272b;
+      --text: #eef5f2;
+      --muted: #9eaaa6;
+      --line: #2d383b;
+      --accent: #35d0a0;
+      --blue: #5aa9ff;
+      --gold: #f5c542;
+      --red: #ef6f6c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: 1480px; margin: 0 auto; padding: 28px; }
+    .topbar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0; font-size: 28px; line-height: 1.05; font-weight: 750; }
+    .subtitle { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+    .updated { color: var(--muted); font-size: 12px; text-align: right; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 112px;
+    }
+    .card h2 { margin: 0 0 10px; color: var(--muted); font-size: 12px; text-transform: uppercase; font-weight: 700; }
+    .metric { font-size: 34px; font-weight: 780; line-height: 1; }
+    .note { color: var(--muted); margin-top: 10px; font-size: 13px; line-height: 1.35; }
+    .layout {
+      display: grid;
+      grid-template-columns: 380px minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .panel h2 { margin: 0 0 14px; font-size: 15px; }
+    .bucket-row {
+      display: grid;
+      grid-template-columns: 116px 1fr 34px;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .bucket-name { color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .bucket-name span { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .bucket-track { height: 8px; background: var(--panel-2); border-radius: 99px; overflow: hidden; }
+    .bucket-track div { height: 100%; border-radius: 99px; }
+    .bucket-count { text-align: right; color: var(--text); font-weight: 650; }
+    .scatter {
+      height: 260px;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--panel-2);
+      background-size: 25% 25%;
+      overflow: hidden;
+    }
+    .scatter::before { content: "Fit"; position: absolute; top: 8px; left: 10px; color: var(--muted); font-size: 12px; }
+    .scatter::after { content: "Hireability"; position: absolute; bottom: 8px; right: 10px; color: var(--muted); font-size: 12px; }
+    .dot {
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.08);
+    }
+    .top-pick {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      background: var(--panel-2);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .top-pick a { font-size: 17px; font-weight: 750; }
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 12px;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    button.active { border-color: var(--accent); color: var(--accent); }
+    .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; min-width: 1160px; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: var(--panel-2); color: var(--muted); font-size: 12px; text-transform: uppercase; position: sticky; top: 0; }
+    tr:hover td { background: rgba(255,255,255,.025); }
+    tbody tr { cursor: pointer; }
+    tbody tr:focus-visible td { outline: 2px solid var(--accent); outline-offset: -2px; }
+    tbody tr a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .tag { display: inline-block; padding: 4px 7px; border: 1px solid; border-radius: 6px; white-space: nowrap; font-size: 12px; font-weight: 700; }
+    .score-cell strong { font-size: 18px; }
+    .meter {
+      display: inline-block;
+      width: 86px;
+      height: 7px;
+      background: var(--panel-2);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .meter span { display: block; height: 100%; background: var(--blue); }
+    .meter.hireability span { background: var(--gold); }
+    td small { display: block; margin-top: 3px; color: var(--muted); text-transform: capitalize; }
+    .salary {
+      display: inline-block;
+      min-width: 82px;
+      padding: 4px 7px;
+      border-radius: 6px;
+      background: var(--panel-2);
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .salary.strong { color: var(--accent); }
+    .salary.borderline, .salary.verify { color: var(--gold); }
+    .salary.low { color: var(--red); }
+    .reasons { color: var(--muted); max-width: 420px; line-height: 1.35; }
+    .section-stack { display: grid; gap: 16px; }
+    .section-panel h2 { margin-bottom: 6px; }
+    .empty-state {
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      color: var(--muted);
+      background: var(--panel-2);
+    }
+    @media (max-width: 980px) {
+      .shell { padding: 18px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .updated { text-align: left; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <h1>Career-Ops Fit Dashboard</h1>
+        <p class="subtitle">Escape Velocity queue ranked by strategic fit and realistic hireability.</p>
+      </div>
+      <div class="updated">Generated<br>8/8/2026, 7:58:12 AM</div>
+    </header>
+
+    <section class="grid">
+      <div class="card"><h2>Apply Now</h2><div class="metric">1</div><div class="note">Comp-qualified roles with believable transition odds.</div></div>
+      <div class="card"><h2>Salary Review</h2><div class="metric">1</div><div class="note">High-fit roles blocked on unknown salary or work-model review.</div></div>
+      <div class="card"><h2>Watch List</h2><div class="metric">26</div><div class="note">Pays enough, but still weak as an immediate move.</div></div>
+      <div class="card"><h2>High Signal</h2><div class="metric">1</div><div class="note">Priority >= 55 and not noise.</div></div>
+      <div class="card"><h2>Average Strategic Fit</h2><div class="metric">49</div><div class="note">How attractive the surfaced roles are for the target direction.</div></div>
+      <div class="card"><h2>Average Hireability</h2><div class="metric">41</div><div class="note">How plausible the surfaced roles are from current evidence.</div></div>
+      <div class="card"><h2>Salary Signals</h2><div class="metric">27</div><div class="note">Roles with visible salary, federal grade, or salary-verification hints.</div></div>
+      <div class="card"><h2>Reject / Noise</h2><div class="metric">2</div><div class="note">Below floor, expired, wrong-profession, or otherwise not worth attention.</div></div>
+    </section>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>Best Current Bet</h2>
+        <div class="top-pick">
+          <span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span>
+          <a href="https://job-boards.greenhouse.io/anthropic/jobs/5140405008">Anthropic | Solutions Architect, Applied AI (Government Technology)</a>
+          <div class="note">Priority 77 / Strategic Fit 85 / Hireability 76 (plausible)</div>
+          <div class="note">systems: solutions architect, applied ai; authority: architect; company priority: high_priority; salary signal: $240000; comp gate: salary meets $150K floor; hireability: plausible; hireability notes: federal SA path leverages clearance and domain, anchors: government technology</div>
+        </div>
+        <h2 style="margin-top:18px">Buckets</h2>
+        
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#ff8a4c"></span>Mission Integration</div>
+          <div class="bucket-track"><div style="width:5%; background:#ff8a4c"></div></div>
+          <div class="bucket-count">0</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#35d0a0"></span>Both</div>
+          <div class="bucket-track"><div style="width:5%; background:#35d0a0"></div></div>
+          <div class="bucket-count">0</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#5aa9ff"></span>Systems</div>
+          <div class="bucket-track"><div style="width:100%; background:#5aa9ff"></div></div>
+          <div class="bucket-count">19</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#f5c542"></span>Clearance</div>
+          <div class="bucket-track"><div style="width:5%; background:#f5c542"></div></div>
+          <div class="bucket-count">0</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#ffdd57"></span>Salary Review</div>
+          <div class="bucket-track"><div style="width:5%; background:#ffdd57"></div></div>
+          <div class="bucket-count">1</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#a5adba"></span>Watch</div>
+          <div class="bucket-track"><div style="width:32%; background:#a5adba"></div></div>
+          <div class="bucket-count">6</div>
+        </div>
+        <div class="bucket-row">
+          <div class="bucket-name"><span style="background:#ef6f6c"></span>Noise</div>
+          <div class="bucket-track"><div style="width:11%; background:#ef6f6c"></div></div>
+          <div class="bucket-count">2</div>
+        </div>
+        <h2 style="margin-top:18px">Fit vs Hireability</h2>
+        <div class="scatter"><a class="dot" href="https://job-boards.greenhouse.io/anthropic/jobs/5140405008" title="Anthropic | Solutions Architect, Applied AI (Government Technology) | Strategic Fit 85 / Hireability 76" style="left:76%; top:15%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/airtable/jobs/8498915002" title="Airtable | Senior Solutions Architect (Remote - US) | Strategic Fit 27 / Hireability 0" style="left:3%; top:73%; background:#ffdd57"></a><a class="dot" href="https://jobs.ashbyhq.com/cohere/1fa01a03-9253-4f62-8f10-0fe368b38cb9" title="Cohere | Applied AI Engineer – Agentic Workflows | Strategic Fit 96 / Hireability 56" style="left:56%; top:4%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/anthropic/jobs/4950664008" title="Anthropic | Partner Solutions Architect, Applied AI | Strategic Fit 88 / Hireability 60" style="left:60%; top:12%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/gleanwork/jobs/4651991005" title="Glean | Founding Forward Deployed Engineer (Remote - US) | Strategic Fit 65 / Hireability 54" style="left:54%; top:35%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/perplexity/aa511ea8-96e3-42ba-b28f-5e222170bcee" title="Perplexity | Forward Deployed Engineer - Applied AI | Strategic Fit 76 / Hireability 45" style="left:45%; top:24%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/da7cbabd-ceed-4d7d-ae25-f226cac0c1c1" title="LangChain | Solutions Architect (Austin)Customer Engineering • Austin, TX • Full time • Remote | Strategic Fit 67 / Hireability 50" style="left:50%; top:33%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/933a41a3-43ca-44de-a0ae-f541149151b7" title="LangChain | Solutions Architect (Dallas)Customer Engineering • Dallas, TX • Full time • Remote | Strategic Fit 67 / Hireability 50" style="left:50%; top:33%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/fiddler-ai/640c12b9-6a07-4be1-a542-d76e4240e2ff" title="Fiddler AI | Solutions Architect, Customer Success - US | Strategic Fit 56 / Hireability 50" style="left:50%; top:44%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/modal/0d9c249b-f305-4b0e-b325-3242ac7274e7" title="Modal | Forward Deployed Engineer - ML | Strategic Fit 61 / Hireability 42" style="left:42%; top:39%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/auctor/73648a39-a671-469d-aa7d-f7bb8b3b6d46" title="Auctor | Forward Deployed Engineer | Strategic Fit 61 / Hireability 42" style="left:42%; top:39%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/0a5dd30c-6da1-4095-bd96-b16f27eeb333" title="LangChain | Solutions Architect | Strategic Fit 53 / Hireability 47" style="left:47%; top:47%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/gleanwork/jobs/4508312005" title="Glean | Solutions Architect | Strategic Fit 53 / Hireability 47" style="left:47%; top:47%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/pinecone/773e953d-8f53-4313-93b4-35a553bad1cb" title="Pinecone | Senior/Staff Software Engineer, Experience PlatformR&amp;D • US Remote • Full time • Remote$190K – $270K • Offers Equity | Strategic Fit 40 / Hireability 54" style="left:54%; top:60%; background:#a5adba"></a><a class="dot" href="https://jobs.ashbyhq.com/pinecone/7ef089cb-a721-4ad8-a6d0-c390e64991d2" title="Pinecone | Senior/Staff Software Engineer, Search &amp; Retrieval InfrastructureR&amp;D • US Remote • Full time • Remote$190K – $270K • Offers Equity | Strategic Fit 40 / Hireability 54" style="left:54%; top:60%; background:#a5adba"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/937e131f-1055-4f1f-bd8a-f036e4ba0666" title="LangChain | Deployed Engineer (Austin)Deployed Engineering • Austin, TX • Full time • Remote | Strategic Fit 50 / Hireability 39" style="left:39%; top:50%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/d7454c6d-7025-4e46-befc-e23bedd8f452" title="LangChain | Deployed Engineer (Charlotte)Deployed Engineering • Charlotte, NC • Full time • Remote | Strategic Fit 50 / Hireability 39" style="left:39%; top:50%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/38947013-3d0c-4257-aa58-ab8fe247ea3e" title="LangChain | Deployed Engineer (Chicago)Deployed Engineering • Chicago, IL • Full time • Remote | Strategic Fit 50 / Hireability 39" style="left:39%; top:50%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/8b533cc4-6654-44b4-b3fc-004def2a9927" title="LangChain | Deployed Engineer (Dallas)Deployed Engineering • Dallas, TX • Full time • Remote | Strategic Fit 50 / Hireability 39" style="left:39%; top:50%; background:#5aa9ff"></a><a class="dot" href="https://jobs.ashbyhq.com/langchain/733417d6-7b74-4260-95d9-3cabf85ce0b8" title="LangChain | Deployed Engineer (Raleigh)Deployed Engineering • Raleigh, NC • Full time • Remote | Strategic Fit 50 / Hireability 39" style="left:39%; top:50%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/smartsheet/jobs/7798778" title="Smartsheet | Senior Forward Deployed AI Engineer | Strategic Fit 53 / Hireability 34" style="left:34%; top:47%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/vercel/jobs/5430088004" title="Vercel | Software Engineer, Backend (Remote - United States) | Strategic Fit 24 / Hireability 48" style="left:48%; top:76%; background:#a5adba"></a><a class="dot" href="https://job-boards.greenhouse.io/arizeai/jobs/5818115004" title="Arize AI | AI Product Manager (United States (Remote)) | Strategic Fit 28 / Hireability 44" style="left:44%; top:72%; background:#a5adba"></a><a class="dot" href="https://job-boards.greenhouse.io/hightouch/jobs/5542602004" title="Hightouch | Software Engineer, AI Agents | Strategic Fit 31 / Hireability 36" style="left:36%; top:69%; background:#5aa9ff"></a><a class="dot" href="https://job-boards.greenhouse.io/airtable/jobs/8442397002" title="Airtable | Software Engineer, Compute (8+ YOE) (San Francisco, CA; New York, NY; Remote - US) | Strategic Fit 1 / Hireability 15" style="left:15%; top:97%; background:#a5adba"></a><a class="dot" href="https://job-boards.greenhouse.io/airtable/jobs/8397618002" title="Airtable | Software Engineer, Product Backend (8+ YOE) (San Francisco, CA; Remote - US (Seattle, WA only)) | Strategic Fit 1 / Hireability 15" style="left:15%; top:97%; background:#a5adba"></a></div>
+      </aside>
+
+      <section class="section-stack">
+        
+    <section class="panel section-panel">
+      <h2>Apply Now</h2>
+      <p class="note">Salary clears the floor, transition looks believable, and the role is still worth real effort.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lane</th>
+              <th>Priority</th>
+              <th>Strategic Fit</th>
+              <th>Hireability</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Salary</th>
+              <th>Resume</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>77</strong></td>
+        <td><div class="meter"><span style="width:85%"></span></div><b>85</b></td>
+        <td><div class="meter hireability"><span style="width:76%"></span></div><b>76</b><small>plausible</small></td>
+        <td><a href="https://job-boards.greenhouse.io/anthropic/jobs/5140405008">Anthropic</a></td>
+        <td>Solutions Architect, Applied AI (Government Technology)</td>
+        <td><span class="salary strong">$240000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </section>
+        
+    <section class="panel section-panel">
+      <h2>Investigate Salary / Work Model</h2>
+      <p class="note">High-fit roles that need salary or practicality verification before tailoring.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lane</th>
+              <th>Priority</th>
+              <th>Strategic Fit</th>
+              <th>Hireability</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Salary</th>
+              <th>Resume</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr data-tag="salary_unknown_review">
+        <td><span class="tag" style="border-color:#ffdd57; color:#ffdd57">Salary Review</span></td>
+        <td class="score-cell"><strong>24</strong></td>
+        <td><div class="meter"><span style="width:27%"></span></div><b>27</b></td>
+        <td><div class="meter hireability"><span style="width:0%"></span></div><b>0</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/airtable/jobs/8498915002">Airtable</a></td>
+        <td>Senior Solutions Architect (Remote - US)</td>
+        <td><span class="salary unknown">Unknown</span><small>unknown</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story. Work model or location appears survivable.<br><strong>Risk:</strong> Transition credibility is weak from current title history. Compensation is not verified against the $150K floor.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Verify salary before resume tailoring; do not move into apply-now until confirmed &gt;= $150K.<br><strong>Next:</strong> Investigate salary and work model first; tailor only if both clear the bar.</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </section>
+        
+    <section class="panel section-panel">
+      <h2>Watch List</h2>
+      <p class="note">Interesting market signals that pay enough but still look like weak or mismatched moves.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lane</th>
+              <th>Priority</th>
+              <th>Strategic Fit</th>
+              <th>Hireability</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Salary</th>
+              <th>Resume</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>71</strong></td>
+        <td><div class="meter"><span style="width:96%"></span></div><b>96</b></td>
+        <td><div class="meter hireability"><span style="width:56%"></span></div><b>56</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/cohere/1fa01a03-9253-4f62-8f10-0fe368b38cb9">Cohere</a></td>
+        <td>Applied AI Engineer – Agentic Workflows</td>
+        <td><span class="salary strong">$500</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> Curriculum workflow modernization | FabricaTempus execution backend | AI-assisted workflow and development orchestration<br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>69</strong></td>
+        <td><div class="meter"><span style="width:88%"></span></div><b>88</b></td>
+        <td><div class="meter hireability"><span style="width:60%"></span></div><b>60</b><small>stretch</small></td>
+        <td><a href="https://job-boards.greenhouse.io/anthropic/jobs/4950664008">Anthropic</a></td>
+        <td>Partner Solutions Architect, Applied AI</td>
+        <td><span class="salary strong">$240000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>56</strong></td>
+        <td><div class="meter"><span style="width:65%"></span></div><b>65</b></td>
+        <td><div class="meter hireability"><span style="width:54%"></span></div><b>54</b><small>stretch</small></td>
+        <td><a href="https://job-boards.greenhouse.io/gleanwork/jobs/4651991005">Glean</a></td>
+        <td>Founding Forward Deployed Engineer (Remote - US)</td>
+        <td><span class="salary strong">$160000-$270000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story. Work model or location appears survivable.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>56</strong></td>
+        <td><div class="meter"><span style="width:76%"></span></div><b>76</b></td>
+        <td><div class="meter hireability"><span style="width:45%"></span></div><b>45</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/perplexity/aa511ea8-96e3-42ba-b28f-5e222170bcee">Perplexity</a></td>
+        <td>Forward Deployed Engineer - Applied AI</td>
+        <td><span class="salary strong">$205K-$335K</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>54</strong></td>
+        <td><div class="meter"><span style="width:67%"></span></div><b>67</b></td>
+        <td><div class="meter hireability"><span style="width:50%"></span></div><b>50</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/da7cbabd-ceed-4d7d-ae25-f226cac0c1c1">LangChain</a></td>
+        <td>Solutions Architect (Austin)Customer Engineering • Austin, TX • Full time • Remote</td>
+        <td><span class="salary strong">$190K</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>54</strong></td>
+        <td><div class="meter"><span style="width:67%"></span></div><b>67</b></td>
+        <td><div class="meter hireability"><span style="width:50%"></span></div><b>50</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/933a41a3-43ca-44de-a0ae-f541149151b7">LangChain</a></td>
+        <td>Solutions Architect (Dallas)Customer Engineering • Dallas, TX • Full time • Remote</td>
+        <td><span class="salary strong">$190K</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>49</strong></td>
+        <td><div class="meter"><span style="width:56%"></span></div><b>56</b></td>
+        <td><div class="meter hireability"><span style="width:50%"></span></div><b>50</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/fiddler-ai/640c12b9-6a07-4be1-a542-d76e4240e2ff">Fiddler AI</a></td>
+        <td>Solutions Architect, Customer Success - US</td>
+        <td><span class="salary strong">$160000-$200000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>47</strong></td>
+        <td><div class="meter"><span style="width:61%"></span></div><b>61</b></td>
+        <td><div class="meter hireability"><span style="width:42%"></span></div><b>42</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/modal/0d9c249b-f305-4b0e-b325-3242ac7274e7">Modal</a></td>
+        <td>Forward Deployed Engineer - ML</td>
+        <td><span class="salary strong">$355</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>47</strong></td>
+        <td><div class="meter"><span style="width:61%"></span></div><b>61</b></td>
+        <td><div class="meter hireability"><span style="width:42%"></span></div><b>42</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/auctor/73648a39-a671-469d-aa7d-f7bb8b3b6d46">Auctor</a></td>
+        <td>Forward Deployed Engineer</td>
+        <td><span class="salary strong">$175000-$290000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>46</strong></td>
+        <td><div class="meter"><span style="width:53%"></span></div><b>53</b></td>
+        <td><div class="meter hireability"><span style="width:47%"></span></div><b>47</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/0a5dd30c-6da1-4095-bd96-b16f27eeb333">LangChain</a></td>
+        <td>Solutions Architect</td>
+        <td><span class="salary strong">$170K</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>46</strong></td>
+        <td><div class="meter"><span style="width:53%"></span></div><b>53</b></td>
+        <td><div class="meter hireability"><span style="width:47%"></span></div><b>47</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/gleanwork/jobs/4508312005">Glean</a></td>
+        <td>Solutions Architect</td>
+        <td><span class="salary strong">$160000-$225000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>44</strong></td>
+        <td><div class="meter"><span style="width:40%"></span></div><b>40</b></td>
+        <td><div class="meter hireability"><span style="width:54%"></span></div><b>54</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/pinecone/773e953d-8f53-4313-93b4-35a553bad1cb">Pinecone</a></td>
+        <td>Senior/Staff Software Engineer, Experience PlatformR&amp;D • US Remote • Full time • Remote$190K – $270K • Offers Equity</td>
+        <td><span class="salary strong">$190K-$270K</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Work model or location appears survivable.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>44</strong></td>
+        <td><div class="meter"><span style="width:40%"></span></div><b>40</b></td>
+        <td><div class="meter hireability"><span style="width:54%"></span></div><b>54</b><small>stretch</small></td>
+        <td><a href="https://jobs.ashbyhq.com/pinecone/7ef089cb-a721-4ad8-a6d0-c390e64991d2">Pinecone</a></td>
+        <td>Senior/Staff Software Engineer, Search &amp; Retrieval InfrastructureR&amp;D • US Remote • Full time • Remote$190K – $270K • Offers Equity</td>
+        <td><span class="salary strong">$190K-$270K</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Work model or location appears survivable.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>41</strong></td>
+        <td><div class="meter"><span style="width:50%"></span></div><b>50</b></td>
+        <td><div class="meter hireability"><span style="width:39%"></span></div><b>39</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/937e131f-1055-4f1f-bd8a-f036e4ba0666">LangChain</a></td>
+        <td>Deployed Engineer (Austin)Deployed Engineering • Austin, TX • Full time • Remote</td>
+        <td><span class="salary strong">$150000-$250000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>41</strong></td>
+        <td><div class="meter"><span style="width:50%"></span></div><b>50</b></td>
+        <td><div class="meter hireability"><span style="width:39%"></span></div><b>39</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/d7454c6d-7025-4e46-befc-e23bedd8f452">LangChain</a></td>
+        <td>Deployed Engineer (Charlotte)Deployed Engineering • Charlotte, NC • Full time • Remote</td>
+        <td><span class="salary strong">$150000-$250000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>41</strong></td>
+        <td><div class="meter"><span style="width:50%"></span></div><b>50</b></td>
+        <td><div class="meter hireability"><span style="width:39%"></span></div><b>39</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/38947013-3d0c-4257-aa58-ab8fe247ea3e">LangChain</a></td>
+        <td>Deployed Engineer (Chicago)Deployed Engineering • Chicago, IL • Full time • Remote</td>
+        <td><span class="salary strong">$150000-$250000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>41</strong></td>
+        <td><div class="meter"><span style="width:50%"></span></div><b>50</b></td>
+        <td><div class="meter hireability"><span style="width:39%"></span></div><b>39</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/8b533cc4-6654-44b4-b3fc-004def2a9927">LangChain</a></td>
+        <td>Deployed Engineer (Dallas)Deployed Engineering • Dallas, TX • Full time • Remote</td>
+        <td><span class="salary strong">$150000-$250000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>41</strong></td>
+        <td><div class="meter"><span style="width:50%"></span></div><b>50</b></td>
+        <td><div class="meter hireability"><span style="width:39%"></span></div><b>39</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/langchain/733417d6-7b74-4260-95d9-3cabf85ce0b8">LangChain</a></td>
+        <td>Deployed Engineer (Raleigh)Deployed Engineering • Raleigh, NC • Full time • Remote</td>
+        <td><span class="salary strong">$150000-$250000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>39</strong></td>
+        <td><div class="meter"><span style="width:53%"></span></div><b>53</b></td>
+        <td><div class="meter hireability"><span style="width:34%"></span></div><b>34</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/smartsheet/jobs/7798778">Smartsheet</a></td>
+        <td>Senior Forward Deployed AI Engineer</td>
+        <td><span class="salary strong">$245000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>34</strong></td>
+        <td><div class="meter"><span style="width:24%"></span></div><b>24</b></td>
+        <td><div class="meter hireability"><span style="width:48%"></span></div><b>48</b><small>stretch</small></td>
+        <td><a href="https://job-boards.greenhouse.io/vercel/jobs/5430088004">Vercel</a></td>
+        <td>Software Engineer, Backend (Remote - United States)</td>
+        <td><span class="salary strong">$196000-$294000</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Work model or location appears survivable.<br><strong>Risk:</strong> Main risk is proving direct role-specific depth quickly.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>34</strong></td>
+        <td><div class="meter"><span style="width:28%"></span></div><b>28</b></td>
+        <td><div class="meter hireability"><span style="width:44%"></span></div><b>44</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/arizeai/jobs/5818115004">Arize AI</a></td>
+        <td>AI Product Manager (United States (Remote))</td>
+        <td><span class="salary strong">$150000-$220000</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Partial adjacency to operations, systems, or mission work.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr>
+      <tr data-tag="systems-escape-velocity">
+        <td><span class="tag" style="border-color:#5aa9ff; color:#5aa9ff">Systems</span></td>
+        <td class="score-cell"><strong>30</strong></td>
+        <td><div class="meter"><span style="width:31%"></span></div><b>31</b></td>
+        <td><div class="meter hireability"><span style="width:36%"></span></div><b>36</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/hightouch/jobs/5542602004">Hightouch</a></td>
+        <td>Software Engineer, AI Agents</td>
+        <td><span class="salary strong">$180000-$400000</span><small>meets</small></td>
+        <td>operations_research_systems</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Use a systems/integration resume and emphasize forecasting, workflow, and execution tooling.</td>
+      </tr>
+      <tr data-tag="noise">
+        <td><span class="tag" style="border-color:#ef6f6c; color:#ef6f6c">Noise</span></td>
+        <td class="score-cell"><strong>28</strong></td>
+        <td><div class="meter"><span style="width:38%"></span></div><b>38</b></td>
+        <td><div class="meter hireability"><span style="width:25%"></span></div><b>25</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/anthropic/jobs/5140403008">Anthropic</a></td>
+        <td>Applied AI Architect, State and Local Government (New York City, NY; Washington, DC)</td>
+        <td><span class="salary strong">$240000</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history. Location risk: new york, new york city.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Ignore unless new evidence improves fit.</td>
+      </tr>
+      <tr data-tag="noise">
+        <td><span class="tag" style="border-color:#ef6f6c; color:#ef6f6c">Noise</span></td>
+        <td class="score-cell"><strong>13</strong></td>
+        <td><div class="meter"><span style="width:22%"></span></div><b>22</b></td>
+        <td><div class="meter hireability"><span style="width:11%"></span></div><b>11</b><small>low</small></td>
+        <td><a href="https://jobs.ashbyhq.com/openai/7b90b83c-ec28-4e65-a235-6675e37b91c3">OpenAI</a></td>
+        <td>Forward Deployed Software Engineer (Seattle)</td>
+        <td><span class="salary strong">$153K-$325K</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Systems/workflow/integration language fits the operator-to-systems-builder story.<br><strong>Risk:</strong> Transition credibility is weak from current title history. Location risk: seattle.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Ignore unless new evidence improves fit.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>5</strong></td>
+        <td><div class="meter"><span style="width:1%"></span></div><b>1</b></td>
+        <td><div class="meter hireability"><span style="width:15%"></span></div><b>15</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/airtable/jobs/8442397002">Airtable</a></td>
+        <td>Software Engineer, Compute (8+ YOE) (San Francisco, CA; New York, NY; Remote - US)</td>
+        <td><span class="salary strong">$196000</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Work model or location appears survivable.<br><strong>Risk:</strong> Transition credibility is weak from current title history. Location risk: new york, san francisco.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr>
+      <tr data-tag="watch">
+        <td><span class="tag" style="border-color:#a5adba; color:#a5adba">Watch</span></td>
+        <td class="score-cell"><strong>5</strong></td>
+        <td><div class="meter"><span style="width:1%"></span></div><b>1</b></td>
+        <td><div class="meter hireability"><span style="width:15%"></span></div><b>15</b><small>low</small></td>
+        <td><a href="https://job-boards.greenhouse.io/airtable/jobs/8397618002">Airtable</a></td>
+        <td>Software Engineer, Product Backend (8+ YOE) (San Francisco, CA; Remote - US (Seattle, WA only))</td>
+        <td><span class="salary strong">$213000</span><small>meets</small></td>
+        <td>mission_integration_advisory</td>
+        <td class="reasons"><strong>Match:</strong> Work model or location appears survivable.<br><strong>Risk:</strong> Transition credibility is weak from current title history. Location risk: san francisco, seattle.<br><strong>Proof:</strong> <br><strong>Salary:</strong> Ask above $150K; pursue only if scope and work model hold.<br><strong>Next:</strong> Keep as a market signal, not an immediate application target.</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </section>
+      </section>
+    </section>
+  </main>
+  <script>
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const link = row.querySelector('a[href]');
+      if (!link) return;
+      row.tabIndex = 0;
+      row.title = 'Open job page: ' + link.href;
+      row.addEventListener('click', event => {
+        if (event.target.closest('a, button')) return;
+        window.open(link.href, '_blank', 'noopener');
+      });
+      row.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          window.open(link.href, '_blank', 'noopener');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
